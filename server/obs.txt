@@ -1,0 +1,23 @@
+
+criar projeto
+yarn init -y
+
+instalar typescript
+yarn add typescript -D
+
+instalar e criar tsconfig
+yarn tsc --init
+
+executa servidor e fica obervando e restarta o servidor
+yarn add ts-node-dev -D
+
+converter javascritp
+--transpile-only
+
+ignorar nomodules e restart e fica online
+--ignore-watch node_modules --respawn 
+
+framework http
+yarn add express
+
+yarn add @types/express
