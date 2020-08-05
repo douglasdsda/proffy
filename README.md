@@ -4,7 +4,7 @@
 
 <p align="center">	
    <a href="https://www.linkedin.com/in/douglas-souza-5b6bab31/">
-      <img alt="Douglas Souza dos Anjos" src="https://img.shields.io/badge/-RafaelGoulartB-8257E5?style=flat&logo=Linkedin&logoColor=white" />
+      <img alt="Douglas Souza dos Anjos" src="https://img.shields.io/badge/-douglasdsda-8257E5?style=flat&logo=Linkedin&logoColor=white" />
    </a>
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/douglasdsda/proffy?color=774DD6">
 
