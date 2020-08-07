@@ -20,4 +20,19 @@ ignorar nomodules e restart e fica online
 framework http
 yarn add express
 
-yarn add @types/express
+yarn add @types/express -D
+
+instalar knex e sqlite3
+knex querybuilder
+
+yarn add knex sqlite3
+
+criar migrate 
+yarn knex:migrate
+
+voltar migrate
+yarn knex:rollback
+
+yarn add cors
+yarn add @types/cors -D
+

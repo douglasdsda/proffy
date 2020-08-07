@@ -1,16 +1,12 @@
 import express from 'express';
+import routes from './routes';
+import cors from 'cors';
 
 const app = express();
 
-app.get('/users', (request, response) => {
-
-  const users = [
-    { name: 'joao', age: 21 },
-    { name: 'maria', age: 23 },
-  ]
-
-    return response.json(users);
-});
+app.use(express.json());
+app.use(cors());
+app.use(routes);
 
 app.listen(3333,()=> {
   console.log('server start');
