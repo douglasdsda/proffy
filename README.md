@@ -24,8 +24,8 @@
 
 <div align="center">
   <sub>The NLW #2 project. Built with ❤︎ by
-    <a href="https://github.com/douglasdsda">Rafael Goulart</a> and
-    <a href="https://github.com/douglasdsda/Proffy/graphs/contributors">
+    <a href="https://github.com/douglasdsda">Douglas Souza</a> and
+    <a href="https://github.com/douglasdsda/proffy/graphs/contributors">
       contributors
     </a>
   </sub>
@@ -139,7 +139,7 @@ Aferter read the QRCode with the app of [expo](https://play.google.com/store/app
 
 # :bug: Issues
 
-Feel free to **file a new issue** with a respective title and description on the the [Proffy](https://github.com/douglas/proffy/issues) repository. If you already found a solution to your problem, **i would love to review your pull request**!
+Feel free to **file a new issue** with a respective title and description on the the [Proffy](https://github.com/douglasdsda/proffy/issues) repository. If you already found a solution to your problem, **i would love to review your pull request**!
 
 # :tada: Contributing
 
