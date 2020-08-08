@@ -1,4 +1,5 @@
 import React from "react";
+import Input from "../../components/Input";
 import PageHeader from "../../components/PageHeader";
 import TeacherItem from "../../components/TeacherItem";
 
@@ -12,21 +13,9 @@ function TeacherList() {
       <PageHeader title="Que incrivel que voce quer dar aulas.">
         <form id="search-teachers">
 
-          <div className="input-block">
-            <label htmlFor="subject">Matéria</label>
-            <input id="subject" type="text"/>
-          </div>
-
-          <div className="input-block">
-            <label htmlFor="week_day">Dia da semana</label>
-            <input id="week_day" type="text"/>
-          </div>
-
-          <div className="input-block">
-            <label htmlFor="time">Hora</label>
-            <input id="time" type="text"/>
-          </div>
-
+          <Input name="subject" label="Matéria" />
+          <Input name="week_day" label="Dia da semana" />
+          <Input type="time" name="time" label="Hora" />
         </form>
       </PageHeader>
 
