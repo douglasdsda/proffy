@@ -62,6 +62,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 16,
   },
+  favorited: {
+    backgroundColor: "#e33d3d",
+  },
   favoriteButton: {
     backgroundColor: "#8257e5",
     width: 56,
