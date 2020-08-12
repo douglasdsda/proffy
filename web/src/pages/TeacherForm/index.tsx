@@ -72,7 +72,7 @@ function TeacherForm() {
       })
       .then(() => {
         alert("Cadastrado com Sucesso.");
-        history.push("/");
+        history.push("/Landing");
       });
   }
 

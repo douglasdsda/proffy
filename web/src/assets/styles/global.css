@@ -17,6 +17,10 @@
   --color-button-text: #FFFFFF;
   --color-box-base: #FFFFFF;
   --color-box-footer: #FAFAFC;
+  --color-title-sin: #32264c;
+  --color-title-sin-button: #dcdce5;
+  --color-title-sin-background: #ffffff;
+  
 
   font-size: 60%;
 }
