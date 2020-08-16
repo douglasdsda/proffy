@@ -1,4 +1,4 @@
-.input-user {
+#input-user {
     width: 100%;
     height: 6.8rem;
     border-radius: 0.8rem;
@@ -12,13 +12,32 @@
     position: relative;
 }
 
-input {
+#input-user.invalid {
+    position: relative;
+}
+
+#input-user .input-label {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: flex-start;
+    width: 100% !important;
+    padding: 1rem 1.6rem;
+    position: relative;
+}
+
+#input-user .input-label label {
+    color: var(--color-text-complement);
+    font-size: 12px;
+    font-weight: 100 !important;
+}
+
+#input-user .input-label input {
     border-radius: 0 !important;
     border: 0 !important;
-    padding: 1rem 1.6rem;
     background: var(--color-input-background);
-    width: 100% !important;
     outline: 0;
+    position: relative;
 }
 
 .input-icon {
@@ -29,13 +48,46 @@ input {
     opacity: 0.6;
 }
 
-.input-user:focus-within::after {
+#input-user:focus-within::after {
     width: calc(100% - 3.2rem);
-    height: 2px;
+    width: 2px;
     content: "";
     background: var(--color-primary-light);
     position: absolute;
-    left: 1.6rem;
-    right: 1.6rem;
-    bottom: 0;
+    left: 0;
+    top: 1.6rem;
+    bottom: 1.6rem;
+}
+
+#input-user.fillValue::before {
+    width: calc(100% - 3.2rem);
+    width: 2px;
+    content: "";
+    background: var(--color-primary-light);
+    position: absolute;
+    left: 0;
+    top: 1.6rem;
+    bottom: 1.6rem;
+}
+
+#input-user.invalid:focus-within::after {
+    width: calc(100% - 3.2rem);
+    width: 2px;
+    content: "";
+    background: crimson;
+    position: absolute;
+    left: 0;
+    top: 1.6rem;
+    bottom: 1.6rem;
+}
+
+#input-user.invalid::before {
+    width: calc(100% - 3.2rem);
+    width: 2px;
+    content: "";
+    background: crimson;
+    position: absolute;
+    left: 0;
+    top: 1.6rem;
+    bottom: 1.6rem;
 }

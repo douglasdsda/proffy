@@ -34,12 +34,12 @@ const Forgot: React.FC = () => {
           <form onSubmit={handleSignin}>
             <h1>Eita esqueceu sua senha?</h1>
             <h2>não esquenta vamos dar um jeito nisso.</h2>
-            <InputUser
+            {/* <InputUser
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               name="name"
               placeholder="E-mail"
-            />
+            /> */}
 
             <button name="submit" type="submit">
               Enviar

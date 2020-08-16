@@ -31,14 +31,14 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    padding: 0 8rem;
+    padding: 0 5rem;
 }
 
-h1+.input-user {
+h1+#input-user {
     margin-top: 3rem;
 }
 
-.input-user+div {
+#input-user+div {
     margin-bottom: 3rem;
 }
 
@@ -75,7 +75,7 @@ h1+.input-user {
     height: 20px;
     top: 0;
     left: 0;
-    background-color: white;
+    background-color: var(--color-text-complement);
     border-radius: 4px;
 }
 
@@ -87,7 +87,7 @@ h1+.input-user {
     height: 20px;
     top: 0;
     left: 0;
-    background-color: var(--color-primary);
+    background-color: var(--color-secundary);
 }
 
 .form-option-content .form-option-save input[type="checkbox"]:checked:after {
@@ -113,6 +113,8 @@ h1+.input-user {
 .form-option-content .forgot {
     margin-top: 8px !important;
     cursor: pointer;
+    text-decoration: none;
+    color: var(--color-text-complement);
 }
 
 .form-option-content .forgot:hover {
@@ -127,13 +129,18 @@ h1+.input-user {
     border-radius: 7px;
     text-align: center;
     padding: 2rem;
-    cursor: pointer;
     outline: none;
 }
 
-.form-content button:hover {
+.form-content button:enabled:hover {
     color: var(--color-title-in-primary);
+    background-color: var(--color-secundary-dark);
+}
+
+.form-content button:enabled {
     background-color: var(--color-secundary);
+    color: var(--color-button-text);
+    cursor: pointer;
 }
 
 .form-footer {
@@ -158,13 +165,13 @@ h1+.input-user {
     .form-content {
         margin-top: 0rem;
         display: flex;
-        width: 570px;
+        width: 650px;
         max-height: 100vh;
     }
     .form-content form {
         margin-top: 1rem;
         display: flex;
-        width: 570px;
+        width: 650px;
         flex-direction: column;
         padding: 0 8rem;
     }
@@ -174,7 +181,7 @@ h1+.input-user {
         border: 1px solid black;
     }
     .background-container img {
-        width: calc(100vw - 570px) !important;
+        width: calc(100vw - 650px) !important;
         object-fit: cover !important;
         height: 100% !important;
     }
