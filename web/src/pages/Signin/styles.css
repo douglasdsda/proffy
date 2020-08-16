@@ -79,10 +79,6 @@ h1+.input-user {
     border-radius: 4px;
 }
 
-.form-option-content .form-option-save input[type="checkbox"]:hover {
-    background-color: #8257e8;
-}
-
 .form-option-content .form-option-save input[type="checkbox"]:checked:before {
     content: "";
     display: block;
@@ -91,7 +87,7 @@ h1+.input-user {
     height: 20px;
     top: 0;
     left: 0;
-    background-color: #8257e8;
+    background-color: var(--color-primary);
 }
 
 .form-option-content .form-option-save input[type="checkbox"]:checked:after {
@@ -114,8 +110,13 @@ h1+.input-user {
     white-space: nowrap;
 }
 
-.form-option-content span:last-child {
+.form-option-content .forgot {
     margin-top: 8px !important;
+    cursor: pointer;
+}
+
+.form-option-content .forgot:hover {
+    color: var(--color-primary);
 }
 
 .form-content button {
@@ -131,8 +132,8 @@ h1+.input-user {
 }
 
 .form-content button:hover {
-    color: var(--color-title-sin-button);
-    background-color: var(--color-text-complement);
+    color: var(--color-title-in-primary);
+    background-color: var(--color-secundary);
 }
 
 .form-footer {

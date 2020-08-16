@@ -1,11 +1,13 @@
 import React, { FormEvent, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
- 
+
 import background from "../../assets/images-v2/Proffy.png";
 
 import InputUser from "../../components/InputUser";
 
 import "./styles.css";
+
+ 
 
 const Signin: React.FC = () => {
   const [name, setName] = useState("");
@@ -27,7 +29,7 @@ const Signin: React.FC = () => {
     <div id="page-signin">
       <div className="container" id="page-signin-content">
         <div className="background-container">
-          <img src={background} alt="logo"/>
+          <img src={background} alt="logo" />
         </div>
 
         <div className="form-content">
@@ -53,7 +55,9 @@ const Signin: React.FC = () => {
                 <label htmlFor="save">Lembrar-me</label>
               </span>
 
-              <span>Esqueci minha senha</span>
+              <Link to="/Forgot" className="forgot">
+                Esqueci minha senha
+              </Link>
             </div>
 
             <button name="submit" type="submit">
