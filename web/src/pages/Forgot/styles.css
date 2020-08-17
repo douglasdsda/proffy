@@ -50,10 +50,13 @@
 #page-forgot h2 {
     margin-top: 0.5rem;
     font-size: 15px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
-#page-forgot h2+.input-user {
+#page-forgot h1+.input-user {
     margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 #page-forgot .input-user+div {
@@ -74,6 +77,7 @@
     padding: 2rem;
     cursor: pointer;
     outline: none;
+    margin-top: 3rem;
 }
 
 #page-forgot .form-content button:hover {
@@ -91,7 +95,7 @@
     #page-forgot .form-content {
         margin-top: 0rem;
         display: flex;
-        width: 570px;
+        width: 650px;
         max-height: 100vh;
     }
     #page-forgot .back {
@@ -103,7 +107,7 @@
     }
     #page-forgot .form-content form {
         display: flex;
-        width: 570px;
+        width: 650px;
         flex-direction: column;
         padding: 0 8rem;
     }
@@ -113,8 +117,8 @@
         border: 1px solid black;
     }
     #page-forgot .background-container img {
-        width: calc(100vw - 570px) !important;
-        object-fit: cover !important;
+        width: calc(100vw - 650px) !important;
+        object-fit: fill !important;
         height: 100% !important;
     }
 }
