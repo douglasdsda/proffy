@@ -4,38 +4,48 @@ import { Link } from "react-router-dom";
 import background from "../../assets/images-v2/Proffy.png";
 
 import InputUser from "../../components/InputUser";
-import heart from "../../assets/images/icons/purple-heart.svg";
+import voltar from "../../assets/images-v2/Voltar.png";
 
 import { FormFields } from "../../utils/FormField";
 import "./styles.css";
 
 const inputsFields = {
+  nome: {
+    value: "",
+    validation: /^(?=.*\d).{2,80}$/,
+    valid: false,
+    touched: false,
+  },
+  sobrenome: {
+    value: "",
+    validation: /^(?=.*\d).{2,80}$/,
+    valid: false,
+    touched: false,
+  },
   email: {
-    value: '',
+    value: "",
     validation: /^[a-z-_\d.]{3,}@[a-z]{3,}(\.com|\.br|\.com\.br)$/i,
     valid: false,
-
     touched: false,
   },
   password: {
-    value: '',
+    value: "",
     validation: /^(?=.*\d).{6,30}$/,
     valid: false,
     touched: false,
   },
 };
 
-const Signin: React.FC = () => {
- 
+const SignUp: React.FC = () => {
   const [fields, setFields] = useState<FormFields>(inputsFields as FormFields);
   const [formValid, setFormValid] = useState(false);
- 
+
   const handleSignin = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
- 
+
       console.log({
-        fields
+        fields,
       });
     },
     [fields]
@@ -60,8 +70,6 @@ const Signin: React.FC = () => {
 
     if (isFormValid !== formValid) setFormValid(isFormValid);
 
-  
-
     setFields({
       ...fields,
       [inputIdentifier]: {
@@ -83,15 +91,37 @@ const Signin: React.FC = () => {
   }
 
   return (
-    <div id="page-signin">
-      <div className="container" id="page-signin-content">
+    <div id="page-signup">
+      <div className="container" id="page-signup-content">
         <div className="background-container">
           <img src={background} alt="logo" />
         </div>
 
         <div className="form-content">
+          <Link to="/" className="voltar">
+            <img src={voltar} alt="voltar" />
+          </Link>
           <form onSubmit={handleSignin}>
-            <h1>Fazer login</h1>
+            <h1>Cadastro</h1>
+            <h2>Preencha os dados abaixo para começar.</h2>
+            <InputUser
+              classStyles={setInputClasses("nome")}
+              value={fields.nome.value}
+              onChange={onInputValueChange}
+              maxLength={80}
+              name="nome"
+              placeholder="Nome"
+              label="Nome"
+            />
+            <InputUser
+              classStyles={setInputClasses("sobrenome")}
+              value={fields.sobrenome.value}
+              onChange={onInputValueChange}
+              maxLength={80}
+              name="sobrenome"
+              placeholder="Sobrenome"
+              label="Sobrenome"
+            />
             <InputUser
               classStyles={setInputClasses("email")}
               value={fields.email.value}
@@ -113,30 +143,9 @@ const Signin: React.FC = () => {
               label="Senha"
             />
 
-            <div className="form-option-content">
-              <span className="form-option-save">
-                <input type="checkbox" name="save" id="save" />
-                <label htmlFor="save">Lembrar-me</label>
-              </span>
-
-              <Link to="/Forgot" className="forgot">
-                Esqueci minha senha
-              </Link>
-            </div>
-
             <button disabled={!formValid} name="submit" type="submit">
-              Entrar
+              Concluir cadastro
             </button>
-
-            <div className="form-footer">
-              <div className="form-footer-register">
-                <span>Não tem conta?</span>
-                <Link to="/SignUp">Cadastre-se</Link>
-              </div>
-              <span>
-                É de graça <img src={heart} alt="Heart" />
-              </span>
-            </div>
           </form>
         </div>
       </div>
@@ -144,4 +153,4 @@ const Signin: React.FC = () => {
   );
 };
 
-export default Signin;
+export default SignUp;
