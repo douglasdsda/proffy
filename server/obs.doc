@@ -15,7 +15,7 @@ converter javascritp
 --transpile-only
 
 ignorar nomodules e restart e fica online
---ignore-watch node_modules --respawn 
+--ignore-watch node_modules --respawn
 
 framework http
 yarn add express
@@ -27,7 +27,7 @@ knex querybuilder
 
 yarn add knex sqlite3
 
-criar migrate 
+criar migrate
 yarn knex:migrate
 
 voltar migrate
@@ -36,3 +36,8 @@ yarn knex:rollback
 yarn add cors
 yarn add @types/cors -D
 
+antigo start
+        // "start": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+
+       "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
+        "knex:rollback": "knex --knexfile knexfile.ts migrate:rollback"
