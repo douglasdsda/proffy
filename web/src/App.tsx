@@ -1,11 +1,18 @@
 import React from "react";
-import "./assets/styles/global.css";
- 
-import Routes from "./routes";
 
+import { BrowserRouter as Router } from "react-router-dom";
+
+import "./assets/styles/global.css";
+
+import Routes from "./routes";
+import AppProvider from "./hooks/index";
 function App() {
   return (
-     <Routes/>
+    <Router>
+      <AppProvider>
+        <Routes />
+      </AppProvider>
+    </Router>
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { FormEvent, useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import background from "../../assets/images-v2/Proffy.png";
 
@@ -8,17 +8,20 @@ import heart from "../../assets/images/icons/purple-heart.svg";
 
 import { FormFields } from "../../utils/FormField";
 import "./styles.css";
+import api from "../../services/api";
+import { useToast } from "../../hooks/toast";
+import { useAuth } from "../../hooks/auth";
 
 const inputsFields = {
   email: {
-    value: '',
+    value: "",
     validation: /^[a-z-_\d.]{3,}@[a-z]{3,}(\.com|\.br|\.com\.br)$/i,
     valid: false,
 
     touched: false,
   },
   password: {
-    value: '',
+    value: "",
     validation: /^(?=.*\d).{6,30}$/,
     valid: false,
     touched: false,
@@ -26,19 +29,45 @@ const inputsFields = {
 };
 
 const Signin: React.FC = () => {
- 
   const [fields, setFields] = useState<FormFields>(inputsFields as FormFields);
   const [formValid, setFormValid] = useState(false);
- 
+  const history = useHistory();
+
+  const { signIn } = useAuth();
+  const { addToast } = useToast();
+
   const handleSignin = useCallback(
-    (e: FormEvent) => {
+    async (e: FormEvent) => {
       e.preventDefault();
- 
-      console.log({
-        fields
-      });
+
+      try {
+        const email = fields.email.value;
+        const password = fields.password.value;
+        console.log(
+          'fields: ',fields,
+          'email: ',email,
+          'password: ', password,
+        )
+        await signIn({
+          email,
+          password,
+        });
+
+        history.push("/Landing");
+
+        addToast({
+          type: "success",
+          title: "Login realizado com sucesso!",
+          description: "Redirecionando para pagina Inicial!",
+        });
+      } catch (error) {
+        addToast({
+          type: "error",
+          title: "Erro no cadastro",
+        });
+      }
     },
-    [fields]
+    [addToast, fields, history, signIn]
   );
 
   function onInputValueChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -59,8 +88,6 @@ const Signin: React.FC = () => {
     } else isFormValid = false;
 
     if (isFormValid !== formValid) setFormValid(isFormValid);
-
-  
 
     setFields({
       ...fields,

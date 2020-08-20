@@ -1,5 +1,5 @@
 import React, { FormEvent, useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import background from "../../assets/images-v2/Proffy.png";
 
@@ -8,6 +8,15 @@ import voltar from "../../assets/images-v2/Voltar.png";
 
 import { FormFields } from "../../utils/FormField";
 import "./styles.css";
+import api from "../../services/api";
+import { useToast } from "../../hooks/toast";
+
+interface SignUpFormData {
+  name: string;
+  email: string;
+  password: string;
+  sobrenome: string;
+}
 
 const inputsFields = {
   nome: {
@@ -40,15 +49,41 @@ const SignUp: React.FC = () => {
   const [fields, setFields] = useState<FormFields>(inputsFields as FormFields);
   const [formValid, setFormValid] = useState(false);
 
-  const handleSignin = useCallback(
-    (e: FormEvent) => {
+  const history = useHistory();
+  const { addToast } = useToast();
+
+  const handleSignUp = useCallback(
+    async (e: FormEvent) => {
       e.preventDefault();
 
-      console.log({
-        fields,
-      });
+      try {
+        const name = fields.nome.value;
+        const email = fields.email.value;
+        const password = fields.password.value;
+        const sobrenome = fields.sobrenome.value;
+
+        await api.post("/users", {
+          name,
+          email,
+          password,
+          sobrenome,
+        });
+
+        history.push("/");
+
+        addToast({
+          type: "success",
+          title: "Cadastro realizado!",
+          description: "Você já pode fazer seu logon no Proffy!",
+        });
+      } catch (error) {
+        addToast({
+          type: "error",
+          title: "Erro no cadastro",
+        });
+      }
     },
-    [fields]
+    [addToast, fields, history]
   );
 
   function onInputValueChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -101,7 +136,7 @@ const SignUp: React.FC = () => {
           <Link to="/" className="voltar">
             <img src={voltar} alt="voltar" />
           </Link>
-          <form onSubmit={handleSignin}>
+          <form onSubmit={handleSignUp}>
             <h1>Cadastro</h1>
             <h2>Preencha os dados abaixo para começar.</h2>
             <InputUser
