@@ -69,7 +69,7 @@ const SignUp: React.FC = () => {
           sobrenome,
         });
 
-        history.push("/");
+        history.push("/UserCreated");
 
         addToast({
           type: "success",

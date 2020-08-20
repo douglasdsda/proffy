@@ -38,6 +38,7 @@
     background: var(--color-input-background);
     outline: 0;
     position: relative;
+    border: 1px solid red;
 }
 
 .input-icon {

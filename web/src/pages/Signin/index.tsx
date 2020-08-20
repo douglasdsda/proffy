@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from "react";
+import React, { FormEvent, useCallback, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import background from "../../assets/images-v2/Proffy.png";
@@ -8,7 +8,7 @@ import heart from "../../assets/images/icons/purple-heart.svg";
 
 import { FormFields } from "../../utils/FormField";
 import "./styles.css";
-import api from "../../services/api";
+ 
 import { useToast } from "../../hooks/toast";
 import { useAuth } from "../../hooks/auth";
 
@@ -31,10 +31,35 @@ const inputsFields = {
 const Signin: React.FC = () => {
   const [fields, setFields] = useState<FormFields>(inputsFields as FormFields);
   const [formValid, setFormValid] = useState(false);
+
+  const [checked, setChecked] = useState(() => {
+    const emailRemembe = localStorage.getItem("@Nlw2:email");
+
+    if (emailRemembe) {
+      setFields({
+        ...fields,
+        email: {
+          ...fields["email"],
+          value: emailRemembe,
+          touched: true,
+          valid: fields["email"].validation.test(emailRemembe),
+        },
+      });
+    }
+
+    return !emailRemembe ? "N" : "S";
+  });
   const history = useHistory();
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
+
+  useEffect(() => {
+    const emailRemembe = localStorage.getItem("@Nlw2:email");
+    if (emailRemembe && checked === "S") {
+      localStorage.setItem("@Nlw2:email", fields.email.value);
+    }
+  }, [checked, fields]);
 
   const handleSignin = useCallback(
     async (e: FormEvent) => {
@@ -44,10 +69,13 @@ const Signin: React.FC = () => {
         const email = fields.email.value;
         const password = fields.password.value;
         console.log(
-          'fields: ',fields,
-          'email: ',email,
-          'password: ', password,
-        )
+          "fields: ",
+          fields,
+          "email: ",
+          email,
+          "password: ",
+          password
+        );
         await signIn({
           email,
           password,
@@ -100,6 +128,21 @@ const Signin: React.FC = () => {
     });
   }
 
+  const handleChecked = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (checked === "N") {
+        setChecked("S");
+        if (fields.email.value)
+          localStorage.setItem("@Nlw2:email", fields.email.value);
+      } else {
+        setChecked("N");
+        if (localStorage.getItem("@Nlw2:email"))
+          localStorage.removeItem("@Nlw2:email");
+      }
+    },
+    [checked, fields.email.value]
+  );
+
   function setInputClasses(inputIdentifier: string) {
     return [
       "",
@@ -142,7 +185,14 @@ const Signin: React.FC = () => {
 
             <div className="form-option-content">
               <span className="form-option-save">
-                <input type="checkbox" name="save" id="save" />
+                <input
+                  type="checkbox"
+                  onChange={(e) => handleChecked(e)}
+                  value={checked}
+                  checked={checked === "S" ? true : false}
+                  name="save"
+                  id="save"
+                />
                 <label htmlFor="save">Lembrar-me</label>
               </span>
 
