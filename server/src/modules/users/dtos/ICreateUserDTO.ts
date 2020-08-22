@@ -3,4 +3,6 @@ export default interface ICreateUserDTO {
   sobrenome: string;
   email: string;
   password: string;
+  bio?: string;
+  whatsapp?: string;
 }

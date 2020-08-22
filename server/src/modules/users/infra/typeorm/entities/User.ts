@@ -22,10 +22,10 @@ class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: '' })
   avatar: string;
 
-  @Column()
+  @Column({ default: '' })
   whatsapp: string;
 
   @Column()

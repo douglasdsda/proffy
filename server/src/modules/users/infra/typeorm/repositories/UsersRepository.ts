@@ -45,6 +45,8 @@ class UsersRepository implements IUsersRepository {
       name,
       password,
       sobrenome,
+      bio: '',
+      whatsapp: '',
     });
 
     await this.ormRepository.save(user);
