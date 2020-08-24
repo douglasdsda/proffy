@@ -41,3 +41,6 @@ antigo start
 
        "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
         "knex:rollback": "knex --knexfile knexfile.ts migrate:rollback"
+
+
+yarn typeorm migration:create
