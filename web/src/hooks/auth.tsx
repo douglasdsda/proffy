@@ -9,6 +9,9 @@ interface User {
   sobrenome: string;
   avatar?: string;
   bio?: string;
+  whatsapp?: string;
+  cost?: string;
+  subject?: string;
 }
 
 interface AuthState {

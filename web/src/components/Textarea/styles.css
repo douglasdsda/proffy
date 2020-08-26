@@ -6,7 +6,6 @@
   margin-top: 1.4rem;
 }
 
-
 .textarea-block label {
   font-size: 1.4rem;
 }
@@ -26,12 +25,60 @@
 }
 
 .textarea-block:focus-within::after {
-   width: calc(100% - 3.2rem);
-   height: 2px;
-   content: '';
-   background: var(--color-primary-light);
-   position: absolute;
-   left: 1.6rem;
-   right: 1.6rem;
-   bottom: 7px; 
+  width: calc(100% - 3.2rem);
+  height: 2px;
+  content: "";
+  background: var(--color-primary-light);
+  position: absolute;
+  left: 1.6rem;
+  right: 1.6rem;
+  bottom: 7px;
+}
+
+.textarea-block .label-description {
+  display: flex;
+  align-items: center;
+}
+
+.textarea-block .label-description span {
+  margin-left: 1rem;
+  color: var(--color-line-in-white);
+}
+
+
+.col-100 {
+  width: 100%;
+}
+
+.col-80 {
+  width: 80%;
+}
+
+.col-75 {
+  width: 75%;
+}
+
+.col-60 {
+  width: 60%;
+}
+
+.col-50 {
+  width: 50%;
+}
+
+.col-40 {
+  width: 40%;
+}
+
+.col-65 {
+  width: 60%;
+}
+
+
+.col-35 {
+  width: 35%;
+}
+
+.col-25 {
+  width: 25%;
 }

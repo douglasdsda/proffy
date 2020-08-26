@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import logoImg from "../../assets/images/logo.svg";
 import landingImg from "../../assets/images/landing.svg";
 import studyIcon from "../../assets/images/icons/study.svg";
 import giveClassesIcon from "../../assets/images/icons/give-classes.svg";
 import purpleHeartIcon from "../../assets/images/icons/purple-heart.svg";
 import sair from "../../assets/images-v2/Sair.svg";
+ 
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import "./styles.css";
 import api from "../../services/api";
@@ -15,6 +16,8 @@ import { useAuth } from "../../hooks/auth";
 function Landing() {
   const [totalConnections, setTotalConnections] = useState(0);
   const { user, signOut } = useAuth();
+   const history = useHistory();
+  
   useEffect(() => {
     api.get("connections").then((response) => {
       const { total } = response.data;
@@ -22,13 +25,17 @@ function Landing() {
     });
   }, []);
 
+  const handleProfile = useCallback(() => {
+    history.push('/Profile');
+  }, [history])
+
   return (
     <div id="page-landing">
       <div className="container" id="page-landing-content">
         <div className="container-title">
           <div className="landing-content-profile">
             <div className="landing-profile">
-              <img src={user.avatar} alt={user.name} />
+              <img onClick={handleProfile}  src={user.avatar} alt={user.name} />
               <span>{user.name}</span>
             </div>
             <img onClick={signOut} src={sair} alt="Sair"/>

@@ -21,25 +21,25 @@ interface SignUpFormData {
 const inputsFields = {
   nome: {
     value: "",
-    validation: /^(?=.*\d).{2,80}$/,
+    validation: /^.{3,80}$/,
     valid: false,
     touched: false,
   },
   sobrenome: {
     value: "",
-    validation: /^(?=.*\d).{2,80}$/,
+    validation: /^.{2,80}$/,
     valid: false,
     touched: false,
   },
   email: {
     value: "",
-    validation: /^[a-z-_\d.]{3,}@[a-z]{3,}(\.com|\.br|\.com\.br)$/i,
+    validation: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     valid: false,
     touched: false,
   },
   password: {
     value: "",
-    validation: /^(?=.*\d).{6,30}$/,
+    validation: /^.{6,30}$/,
     valid: false,
     touched: false,
   },

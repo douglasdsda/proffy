@@ -1,21 +1,31 @@
-import React, { TextareaHTMLAttributes } from 'react'; 
+import React, { TextareaHTMLAttributes } from "react";
 
-import './styles.css';
+import "./styles.css";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-label: string;
-name: string;
+  label: string;
+  name: string;
+  description?: string;
+  col?: string;
 }
 
-const Textarea: React.FC<TextareaProps> = ({label, name, ...rest}) => {
+const Textarea: React.FC<TextareaProps> = ({
+  label,
+  name,
+  col,
+  description,
+  ...rest
+}) => {
   return (
-    <div className="textarea-block">
-    <label htmlFor={name}>{label}</label>
-    <textarea id={name} {...rest} >
-      
-    </textarea>
-  </div>
+    
+    <div className={ col ? `textarea-block ${col}` : "textarea-block"} >
+      <div className="label-description">
+        <label htmlFor={name}>{label}</label>
+        <span>{description && "(" + description + ")"}</span>
+      </div>
+      <textarea id={name} {...rest}></textarea>
+    </div>
   );
-}
+};
 
 export default Textarea;

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, useEffect } from "react";
 import Input from "../../components/Input";
 import PageHeader from "../../components/PageHeader";
 import warningIcon from "../../assets/images/icons/warning.svg";
@@ -9,15 +9,25 @@ import Select from "../../components/Select";
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { removePhoneMask } from "../../utils/Helper";
 
-function TeacherForm() {
+interface Shedule {
+  id?: number;
+  subject: string;
+  cost: number;
+  created_at?: Date;
+  user_id?: string;
+}
+
+
+
+function Profile() {
   const history = useHistory();
-
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const [name, setName] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
   const [email, setEmail] = useState("");
+  const [sobrenome, SetSobrenome] = useState("");
   const [avatar, setAvatar] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [bio, setBio] = useState("");
@@ -28,6 +38,33 @@ function TeacherForm() {
   const [scheduleItems, setScheduleItems] = useState([
     { week_day: 0, from: "", to: "" },
   ]);
+
+  useEffect(() => {
+    const load = async () => {
+ 
+      const response = await api.get('users');
+      
+ 
+
+      const {classes , shedule } = await response.data; 
+
+      
+      setBio(user?.bio || "");
+      SetSobrenome(user.sobrenome);
+      setName(user.name);
+      setEmail(user.email);
+      setWhatsapp(user?.whatsapp || "");
+      setCost(classes?.cost || "" )
+      setSubject(classes?.subject || "");
+
+
+     console.log(response.data);
+      
+      setScheduleItems(shedule);
+    };
+
+    load();
+  }, [user]);
 
   function addNewScheduleItem() {
     setScheduleItems([
@@ -58,37 +95,53 @@ function TeacherForm() {
 
     console.log({
       name,
+      sobrenome,
+      email,
       avatar,
-      whatsapp,
+      whatsapp: removePhoneMask({ value: whatsapp }),
       bio,
       subject,
       cost,
       scheduleItems,
     });
 
+    
+
     api
-      .post("classes", {
+      .put("users", {
         name,
+        email,
+        sobrenome,
         avatar,
         whatsapp,
         bio,
         subject,
         cost: Number(cost),
-        schedule: scheduleItems,
+        shedule: scheduleItems,
       })
       .then(() => {
         alert("Cadastrado com Sucesso.");
+        updateUser({
+          name,
+          sobrenome,
+          email,
+          avatar,
+          whatsapp: removePhoneMask({ value: whatsapp }),
+          bio,
+          id: user.id,
+           
+        });
         history.push("/Landing");
       });
   }
 
   return (
-    <div id="page-teacher-form" className="container">
+    <div id="page-profile-form" className="container">
       <PageHeader
-        title="Que incrível que dar aulas"
-        description="O Primeiro passo é preencher esse formulario de inscrição"
-        iconHeader
-        path="Dar aulas"
+        avatar={user.avatar}
+        title={user.name}
+        path="Meu perfil"
+        description={user.bio ? user.bio : "sem biografia"}
       />
 
       <main>
@@ -97,10 +150,40 @@ function TeacherForm() {
             <legend>Seus Dados</legend>
 
             <div className="line">
-              <div className="teacher-info">
-                <img src={user.avatar} alt="" />
-                <strong>{user.name}</strong>
-              </div>
+              <Input
+                col="col-50"
+                name="name"
+                required
+                label="Nome Completo"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+
+              <Input
+                col="col-50"
+                name="sobrenome"
+                required
+                label="Sobrenome"
+                value={sobrenome}
+                onChange={(e) => {
+                  SetSobrenome(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="line">
+              <Input
+                col="col-60"
+                name="email"
+                required
+                label="E-mail"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
 
               <Input
                 col="col-40"
@@ -240,4 +323,4 @@ function TeacherForm() {
   );
 }
 
-export default TeacherForm;
+export default Profile;
