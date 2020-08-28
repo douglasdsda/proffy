@@ -1,24 +1,30 @@
 import express from 'express';
+import cors from 'cors';
 
-import UsersController from './controllers/UsersController';
-import ensureAuthenticated from './modules/users/infra/http/middlewares/ensureAuthenticated';
+ 
+import ClassesController from './controllers/ClassesController';
+import ConnectionsController from './controllers/ConnectionsController';
+import ForgotController from './controllers/ForgotController';
+import ResetPasswordController from './controllers/ResetPasswordController';
 import SessionsController from './controllers/SessionsController';
+import UsersController from './controllers/UsersController';
 
-const routes = express.Router();
-const usersController = new UsersController();
-const sessionController = new SessionsController();
-// const classesController = new ClassesController();
-// const connectionsController = new ConnectionsController();
+import ensureAuthenticated from './middlewares';
 
-// routes.post('/classes', classesController.create);
-// routes.get('/classes', classesController.index);
+const routes = express.Router()
 
-routes.post('/users', usersController.create);
-routes.get('/users', ensureAuthenticated, usersController.index);
+routes.use(express.json())
+routes.use(cors())
 
-routes.post('/sessions', sessionController.create);
+routes.post('/sessions', SessionsController.create);
+routes.post('/users', UsersController.create);
+routes.post('/forgot', ForgotController.create)
+routes.post('/resetpassword', ResetPasswordController.create)
 
-// routes.post('/connections', connectionsController.create);
-// routes.get('/connections', connectionsController.index);
+routes.post('/classes', ensureAuthenticated, ClassesController.create)
+routes.get('/classes',ensureAuthenticated , ClassesController.index)
+ 
+routes.get('/connections', ensureAuthenticated, ConnectionsController.index)
+routes.post('/connections', ensureAuthenticated, ConnectionsController.create)
 
-export default routes;
+export default routes
