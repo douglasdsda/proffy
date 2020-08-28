@@ -9,4 +9,6 @@ const PORT = 3333
 
 app.use(routes)
 
-app.listen(PORT, () => console.log('Server started @PORT=' + PORT))
+app.listen(3333, () => {
+  console.log(' 🚀 Server started on port  3333!');
+});
