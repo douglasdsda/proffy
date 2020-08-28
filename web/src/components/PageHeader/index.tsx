@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -27,7 +28,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
         <img src={logoImg} alt="Proff" />
       </div>
 
-      <div className="header-content">
+      <div className="header-content"> 
         {props?.avatar && <img src={props?.avatar} />}
         <strong>{props.title}</strong>
 

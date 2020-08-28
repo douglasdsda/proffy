@@ -39,10 +39,10 @@ const InputUser: React.FC<InputUserProps> = ({
       id="input-user"
       className={hasValue && !classStyles ? "fillValue" : classStyles}
     >
-      <div className="input-label">
+      <span className="input-label">
         {label && hasValue && <label htmlFor={name}>{label}</label>}
         <input type={type ? "password" : "text"} id={name} {...rest} />
-      </div>
+      </span>
       {typePassword && (
         <img
           onClick={handleAlterType}

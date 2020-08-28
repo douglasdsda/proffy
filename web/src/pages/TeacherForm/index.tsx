@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, useEffect } from "react";
 import Input from "../../components/Input";
 import PageHeader from "../../components/PageHeader";
 import warningIcon from "../../assets/images/icons/warning.svg";
@@ -9,11 +9,23 @@ import Select from "../../components/Select";
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import convertHourToMinutes from "../../utils/convertHourToMinutes";
+import { removePhoneMask } from "../../utils/Helper";
+
+interface SheduleDTO {
+  id?: number;
+  to: string;
+  from: string;
+  week_day: number;
+  created_at?: Date;
+  class_id?: string;
+}
+
 
 function TeacherForm() {
   const history = useHistory();
 
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const [name, setName] = useState("");
   const [sobrenome, setSobrenome] = useState("");
@@ -28,6 +40,38 @@ function TeacherForm() {
   const [scheduleItems, setScheduleItems] = useState([
     { week_day: 0, from: "", to: "" },
   ]);
+
+  useEffect(() => {
+    const load = async () => {
+      const response = await api.get("users");
+
+      const { classes, shedule } = await response.data;
+
+      setBio(user?.bio || "");
+
+     
+      
+ 
+      setWhatsapp(user?.whatsapp || "");
+      setCost(classes?.cost || "");
+      setSubject(classes?.subject || "");
+
+ 
+
+      const formattedShedule = shedule.map((item: SheduleDTO) => {
+        return {
+          ...item,
+          to: convertHourToMinutes(item.to),
+          from: convertHourToMinutes(item.from),
+        };
+      });
+     
+      if (formattedShedule) setScheduleItems(formattedShedule);
+    };
+
+    load();
+  }, [user]);
+
 
   function addNewScheduleItem() {
     setScheduleItems([
@@ -53,13 +97,16 @@ function TeacherForm() {
     });
     setScheduleItems(updateSheduleItems);
   }
+  
   function handleCreateClass(e: FormEvent) {
     e.preventDefault();
 
     console.log({
       name,
+      sobrenome,
+      email,
       avatar,
-      whatsapp,
+      whatsapp: removePhoneMask({ value: whatsapp }),
       bio,
       subject,
       cost,
@@ -67,18 +114,20 @@ function TeacherForm() {
     });
 
     api
-      .post("classes", {
+      .post("shedules", {
         name,
+        email,
+        sobrenome,
         avatar,
         whatsapp,
         bio,
         subject,
         cost: Number(cost),
-        schedule: scheduleItems,
+        shedule: scheduleItems,
       })
       .then(() => {
-        alert("Cadastrado com Sucesso.");
-        history.push("/Landing");
+        
+        history.push("/CreatedShedule");
       });
   }
 

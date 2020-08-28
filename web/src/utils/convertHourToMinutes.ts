@@ -1,8 +1,8 @@
 export default function convertHourToMinutes(time: string) {
   let [hour , minutes] = (Number(time)/60).toString().split('.');
-  if(minutes) minutes = formattedvalue(minutes);
+  if(minutes && parseInt(minutes) > 0) minutes = formattedvalue(minutes);
   else minutes = '00';
-
+ 
   return hour+':'+minutes;
 }
 
@@ -11,6 +11,7 @@ export default function convertHourToMinutes(time: string) {
 
   const calc = Number(prefix+value) * 60; 
 
-  const calcInteiro = parseInt(calc.toString()) + 1;
-  return calcInteiro.toString();
+  const calcInteiro = Math.round(calc);
+  const valuereturn = calcInteiro < 10 ? '0'+ calcInteiro : calcInteiro;
+  return valuereturn.toString();
 }
