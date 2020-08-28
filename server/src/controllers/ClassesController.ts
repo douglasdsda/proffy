@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import db from "../database/connection";
 import convertHourToMinutes from "../utils/convertHourToMinutes";
+import { uuid } from "uuidv4";
 
 interface ScheduleItem {
   week_day: { value: number };
@@ -34,6 +35,7 @@ export default class ClassesController {
   static async create(req: Request, res: Response) {
     const {
       name,
+      email,
       sobrenome,
       avatar,
       whatsapp,
@@ -46,18 +48,38 @@ export default class ClassesController {
     const trx = await db.transaction();
 
     try {
-      const insertedUsersIds = await trx("users").insert({
+      const arrayUser = await trx("users")
+        .select("*")
+        .where("email", "=", email);
+
+      if (arrayUser.length === 0) throw new Error("User email not exists.");
+
+      const user = arrayUser[0];
+      console.log({
+        id: user.id,
         name,
+        email,
         avatar,
         whatsapp,
         sobrenome,
-        bio_header: bio.bio_header,
-        bio_content: bio.bio_content,
+        bio,
+      });
+
+      const insertedUsersIds = await trx("users").insert({
+        id: user.id,
+        name,
+        sobrenome,
+        email,
+        password: user.password,
+        avatar: user.avatar || avatar,
+        whatsapp,
+        bio,
       });
 
       const user_id = insertedUsersIds[0];
 
       const insertedClassesIds = await trx("classes").insert({
+        id: uuid(),
         subject,
         cost,
         user_id,
@@ -67,6 +89,7 @@ export default class ClassesController {
 
       const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
         return {
+        id: uuid(),
           week_day: scheduleItem.week_day.value,
           from: convertHourToMinutes(scheduleItem.from),
           to: convertHourToMinutes(scheduleItem.to),

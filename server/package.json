@@ -15,6 +15,7 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.0.27",
     "@types/nodemailer": "^6.4.0",
+    "@types/uuidv4": "^5.0.0",
     "ts-node-dev": "^1.0.0-pre.56",
     "typescript": "^3.9.7"
   },
@@ -26,6 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.2",
     "nodemailer": "^6.4.11",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "uuidv4": "^6.2.3"
   }
 }

@@ -2,7 +2,7 @@ import Knex from "knex";
 
 export async function up(knex: Knex) {
   await knex.schema.createTable("users_tokens", (table) => {
-    table.increments("id").primary();
+    table.string('id').unique().primary()
     table.string("token");
     table
       .timestamp("created_at")

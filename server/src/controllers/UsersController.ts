@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { uuid } from "uuidv4";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "../database/connection";
@@ -27,6 +28,7 @@ export default class UsersController {
               : String(password).length;
 
           const newUser = {
+            id: uuid(),
             name,
             sobrenome,
             email,
