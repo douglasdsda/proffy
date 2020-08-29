@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import db from "../database/connection";
 import convertHourToMinutes from "../utils/convertHourToMinutes";
-import { uuid } from "uuidv4";
 
 interface ScheduleItem {
-  week_day: { value: number };
+  week_day: number;
   from: string;
   to: string;
+  class_id: any;
 }
 
 export default class ClassesController {
@@ -48,56 +48,68 @@ export default class ClassesController {
     const trx = await db.transaction();
 
     try {
+      const user_id = req.user.id;
+
       const arrayUser = await trx("users")
         .select("*")
-        .where("email", "=", email);
+        .where("id", "=", user_id);
 
-      if (arrayUser.length === 0) throw new Error("User email not exists.");
+      if (arrayUser.length === 0) throw new Error("User User not exists.");
 
       const user = arrayUser[0];
-      console.log({
-        id: user.id,
-        name,
-        email,
-        avatar,
-        whatsapp,
-        sobrenome,
-        bio,
-      });
 
-      const insertedUsersIds = await trx("users").insert({
-        id: user.id,
-        name,
-        sobrenome,
-        email,
-        password: user.password,
-        avatar: user.avatar || avatar,
-        whatsapp,
-        bio,
-      });
+      const insertedUsersIds = await trx("users")
+        .where("id", "=", user_id)
+        .update({
+          id: user_id,
+          name,
+          sobrenome,
+          email,
+          password: user.password,
+          avatar: user.avatar || avatar,
+          whatsapp,
+          bio,
+        });
 
-      const user_id = insertedUsersIds[0];
+      // const user_id = insertedUsersIds;
 
-      const insertedClassesIds = await trx("classes").insert({
-        id: uuid(),
-        subject,
-        cost,
-        user_id,
-      });
+      const hasClasses_userId = await trx("classes")
+        .select("id")
+        .where("user_id", "=", user_id)
+        .first();
+      let class_id: any;
 
-      const class_id = insertedClassesIds[0];
+      if (hasClasses_userId && hasClasses_userId.id) {
+        class_id = hasClasses_userId.id;
+        await trx("classes").where("id", "=", hasClasses_userId.id).update({
+          id: hasClasses_userId.id,
+          subject,
+          cost,
+          user_id,
+        });
+      } else {
+        class_id = await trx("classes").insert({
+          subject,
+          cost,
+          user_id,
+        });
+      }
 
-      const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
-        return {
-        id: uuid(),
-          week_day: scheduleItem.week_day.value,
-          from: convertHourToMinutes(scheduleItem.from),
-          to: convertHourToMinutes(scheduleItem.to),
-          class_id,
-        };
-      });
+      if (class_id > 0) {
+        class_id = hasClasses_userId ? class_id : class_id[0];
+  
+        const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
+          return {
+            week_day: scheduleItem.week_day,
+            from: convertHourToMinutes(scheduleItem.from),
+            to: convertHourToMinutes(scheduleItem.to),
+            class_id,
+          };
+        });
 
-      await trx("class_schedule").insert(classSchedule);
+        console.log("shedule: ", classSchedule[0]);
+        await trx("class_schedule").insert(classSchedule);
+      }
 
       await trx.commit();
       return res.status(201).json({ message: "Success" });

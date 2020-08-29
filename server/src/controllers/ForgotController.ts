@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
 
-import jwt from "jsonwebtoken";
+import { hash, compare } from "bcryptjs";
 import db from "../database/connection";
-import authConfig from "../config/auth";
+ 
 import sendMail from "../services/ProviderEmail";
+import authConfig from "../config/auth";
 
-function generateToken(id: string, expiresIn = authConfig.jwt.expiresIn) {
-  return jwt.sign({ id }, authConfig.jwt.secret, { expiresIn });
-}
+ 
 
 let tokenTimer: NodeJS.Timeout;
 
@@ -26,7 +25,7 @@ export default class ForgotController {
 
       const userId = user.id;
 
-      const usersToken = generateToken(email, 8);
+      const usersToken = await hash(email, 8);
 
       const find_user = await db("users_tokens")
         .select("user_id")

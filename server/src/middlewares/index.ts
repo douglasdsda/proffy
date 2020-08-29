@@ -21,10 +21,11 @@ export = (req: Request, res: Response, next: NextFunction) => {
     const { sub } = decoded as TokenPayload;
 
     jwt.verify(token, authConfig.jwt.secret);
-
+ 
     req.user = {
       id: sub,
     };
+ 
 
     return next();
   } catch (err) {

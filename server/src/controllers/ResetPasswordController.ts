@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { hash, compare } from "bcryptjs";
+import { isAfter, addHours } from "date-fns";
 import db from "../database/connection";
 import authConfig from "../config/auth";
 
@@ -14,23 +14,25 @@ export default class ResetPasswordController {
         .first();
 
       if (userToken) {
-        jwt.verify(token, authConfig.jwt.secret, async (err: any) => {
-          if (err) return res.status(401).json({ error: "token ixpired." });
+        const tokenCreated = userToken.created_at;
 
-          const user_id = userToken.user_id;
+        const compareDate = addHours(tokenCreated, 2);
 
-          bcrypt.genSalt(8, async (_, salt) => {
-            const hash = await bcrypt.hash(new_password, salt);
+        if (isAfter(Date.now(), compareDate)) {
+          return res.status(401).json({ error: "token ixpired." });
+        }
 
-            await db("users").where("id", "=", user_id).update({
-              password: hash,
-            });
+        const user_id = userToken.user_id;
 
-            await db("users_tokens").delete("*").where("user_id", "=", user_id);
+        const passwordhash = await hash(new_password, 8);
 
-            return res.status(200).json({ status: "OK" });
-          });
+        await db("users").where("id", "=", user_id).update({
+          password: passwordhash,
         });
+
+        await db("users_tokens").delete("*").where("user_id", "=", user_id);
+
+        return res.status(200).json({ status: "OK" });
       } else
         return res.status(400).json({
           error: "token is invalid, token used.",
