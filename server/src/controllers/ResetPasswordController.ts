@@ -2,10 +2,9 @@ import { Request, Response } from 'express';
 import { hash } from 'bcryptjs';
 import { isAfter, addHours } from 'date-fns';
 import db from '../database/connection';
-import authConfig from '../config/auth';
 
 export default class ResetPasswordController {
-    static async create(req: Request, res: Response) {
+    public async create(req: Request, res: Response) {
         const { token, new_password } = req.body;
         try {
             const userToken = await db('users_tokens')

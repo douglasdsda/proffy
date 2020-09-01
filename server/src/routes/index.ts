@@ -1,33 +1,19 @@
 import { Router } from 'express';
- 
 
- 
-// import ClassesController from './controllers/ClassesController';
-// import ConnectionsController from './controllers/ConnectionsController';
-// import ForgotController from './controllers/ForgotController';
-// import ResetPasswordController from './controllers/ResetPasswordController';
-// import SessionsController from './controllers/SessionsController';
-// import UsersController from './controllers/UsersController';
+import usersRouter from './users/users.routes';
+import sessionsRouter from './users/sessions.routes';
+import forgotRouter from './users/forgot.routes';
+import connectionsRouter from './users/connections.routes';
+import classesRouter from './users/classes.routes';
+import resetPasswordRouter from './users/resetPassword.routes';
 
-// import ensureAuthenticated from './middlewares';
-import usersRouter from '../routes/users/users.routes';
-import sessionsRouter from '../routes/users/sessions.routes';
+const routes = Router();
 
-const routes = Router()
-// const usersController = new UsersController();
+routes.use('/users', usersRouter);
+routes.use('/sessions', sessionsRouter);
+routes.use('/forgot', forgotRouter);
+routes.use('/reset', resetPasswordRouter);
+routes.use('/connections', connectionsRouter);
+routes.use('/classes', classesRouter);
 
- routes.use('/users', usersRouter);
- routes.use('/sessions', sessionsRouter);
- 
-
-// routes.post('/sessions', SessionsController.create);
-// routes.post('/forgot', ForgotController.create)
-// routes.post('/resetpassword', ResetPasswordController.create)
-
-// routes.post('/classes', ensureAuthenticated, ClassesController.create)
-// routes.get('/classes',ensureAuthenticated , ClassesController.index)
- 
-// routes.get('/connections', ensureAuthenticated, ConnectionsController.index)
-// routes.post('/connections', ensureAuthenticated, ConnectionsController.create)
-
-export default routes
+export default routes;

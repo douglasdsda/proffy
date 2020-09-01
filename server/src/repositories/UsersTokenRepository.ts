@@ -3,10 +3,9 @@ import UserToken from '../entities/UserToken';
 
 import db from '../database/connection';
 import IUpdateUserDTO from '../dtos/IUpdateUserDTO';
+import ICreateUserTokenDTO from '../dtos/ICreateUserTokenDTO';
 
-class UsersRepository implements IUsersTokensRepository {
-    constructor() {}
-
+class UsersTokensRepository implements IUsersTokensRepository {
     public async findByToken(token: string): Promise<UserToken | undefined> {
         const userTokenDB = await db('users_tokens')
             .select('*')
@@ -53,12 +52,10 @@ class UsersRepository implements IUsersTokensRepository {
         return userToken || undefined;
     }
 
-    public async save(userToken: UserToken): Promise<UserToken> {
-        const userDBId = await db('users_tokens').insert(userToken);
+    public async save(userToken: ICreateUserTokenDTO): Promise<string> {
+        await db('users_tokens').insert(userToken);
 
-        userToken.id = userDBId;
-
-        return userToken || undefined;
+        return userToken.hash;
     }
 
     public async update(updateUserDTO: IUpdateUserDTO): Promise<void> {
@@ -70,4 +67,4 @@ class UsersRepository implements IUsersTokensRepository {
     }
 }
 
-export default UsersRepository;
+export default UsersTokensRepository;

@@ -1,8 +1,12 @@
 import ICreateClasses from '../dtos/ICreateClasses';
 import Classes from '../entities/Classes';
 
-export default interface IUsersRepository {
+import IClassesFindPagination from '../dtos/IClassesFindPagination';
+
+export default interface IClassesRepository {
     findById(id: number): Promise<Classes | undefined>;
+
+    findPagination(data: IClassesFindPagination): Promise<void>;
 
     findByUserId(user_id: number): Promise<Classes | undefined>;
 

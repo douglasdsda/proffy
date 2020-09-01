@@ -1,6 +1,6 @@
 import { hash } from 'bcryptjs';
 import { injectable, inject } from 'tsyringe';
-import sendMail from 'services/ProviderEmail';
+import sendMail from '../ProviderEmail';
 import AppError from '../../errors/AppErros';
 import IUsersRepository from '../../interfaces/IUsersRepository';
 import IUsersTokensRepository from '../../interfaces/IUsersTokensRepository';
@@ -9,7 +9,7 @@ interface IRequest {
     email: string;
 }
 @injectable()
-class CreateUsersService {
+class ForgotService {
     constructor(
         @inject('UsersRepository')
         private usersRepository: IUsersRepository,
@@ -49,4 +49,4 @@ class CreateUsersService {
     }
 }
 
-export default CreateUsersService;
+export default ForgotService;

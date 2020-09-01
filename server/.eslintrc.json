@@ -29,6 +29,9 @@
         "class-methods-use-this": "off",
         "no-useless-constructor": "off",
         "import/no-unresolved": "off",
+        "prefer-destructuring": "off",
+        "no-nested-ternary": "off",
+        "no-param-reassign": "off",
         "camelcase": "off",
         "prettier/prettier": [
             "error",

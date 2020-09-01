@@ -1,11 +1,11 @@
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
 
 declare const process: {
     env: {
-        MAIL_USER: string,
-        MAIL_PASS: string
-    }
-}
+        MAIL_USER: string;
+        MAIL_PASS: string;
+    };
+};
 
 const transport = nodemailer.createTransport({
     host: 'smtp.office365.com',
@@ -14,22 +14,18 @@ const transport = nodemailer.createTransport({
     tls: { ciphers: 'SSLv3' },
     auth: {
         user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS
- 
-    }
-})
+        pass: process.env.MAIL_PASS,
+    },
+});
 
 export default async function sendMail(receiverMail: string, token: string) {
-
-    
-
     const message = {
         from: process.env.MAIL_USER,
         to: receiverMail,
-        subject: "Proffy - Recuperação de senha",
+        subject: 'Proffy - Recuperação de senha',
         text: `Você recebeu este email para acessar o link de recuperação de sua senha no 
         Proffy. Para recuperar sua senha, acesse o link a seguir: 
-        http://192.168.100.12:3000/auth/recuperar-senha/usuario/${token}
+        http://localhost:3000/Reset/${token}
         Não foi você? Apenas ignore este email.
         `,
         html: `
@@ -39,12 +35,12 @@ export default async function sendMail(receiverMail: string, token: string) {
             <p>Para recuperar sua senha, acesse o link abaixo:</p>
             <a 
                 target="_blank"  
-                href="http://192.168.100.12:3000/auth/recuperar-senha/usuario/${token}"
+                href="http://localhost:3000/Reset/token/${token}"
             >Link para recuperação de senha</a> 
             
             <p>Não foi você? Apenas ignore este email.</p>
-        `
-    }
+        `,
+    };
     console.log('transporte: ', transport);
-    return transport.sendMail(message)
+    return transport.sendMail(message);
 }
