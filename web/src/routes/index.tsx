@@ -10,6 +10,7 @@ import Route from "./Route";
 import UserCreated from '../pages/UserCreated';
 import Profile from '../pages/Profile';
 import CreatedShedule from '../pages/CreatedShedule';
+import Reset from '../pages/Reset';
 
 function Routes() {
   return (
@@ -18,6 +19,7 @@ function Routes() {
       <Route path="/Forgot" component={Forgot}  />
       <Route path="/SignUp" component={SignUp}  />
       <Route path="/UserCreated" component={UserCreated}  />
+      <Route path="/Reset/:token" component={Reset}  />
       
       <Route isPrivate  path="/Landing" component={Landing}  />
       <Route isPrivate  path="/CreatedShedule" component={CreatedShedule}  />

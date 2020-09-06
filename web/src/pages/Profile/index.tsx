@@ -41,8 +41,8 @@ function Profile() {
 
   useEffect(() => {
     const load = async () => {
-      const response = await api.get("users");
-
+      const response = await api.get("classes");
+      console.log("responde: ", response);
       const { classes, shedule } = await response.data;
 
       setBio(user?.bio || "");
@@ -54,9 +54,7 @@ function Profile() {
       setCost(classes?.cost || "");
       setSubject(classes?.subject || "");
 
- 
-
-       if(shedule) {
+      if (shedule) {
         const formattedShedule = shedule.map((item: SheduleDTO) => {
           return {
             ...item,
@@ -67,7 +65,6 @@ function Profile() {
 
         if (formattedShedule) setScheduleItems(formattedShedule);
       }
-     
     };
 
     load();
@@ -113,7 +110,7 @@ function Profile() {
     });
 
     api
-      .put("users", {
+      .post("classes", {
         name,
         email,
         sobrenome,

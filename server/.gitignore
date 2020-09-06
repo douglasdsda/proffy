@@ -27,3 +27,5 @@ src/.env
 
 dist/
 
+tmp/uploads/*
+!tmp/uploads/.gitkeep

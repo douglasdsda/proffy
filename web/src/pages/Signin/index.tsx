@@ -67,14 +67,7 @@ const Signin: React.FC = () => {
       try {
         const email = fields.email.value;
         const password = fields.password.value;
-        console.log(
-          "fields: ",
-          fields,
-          "email: ",
-          email,
-          "password: ",
-          password
-        );
+       
         await signIn({
           email,
           password,
