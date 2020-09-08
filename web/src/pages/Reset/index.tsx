@@ -1,14 +1,19 @@
 import React, { FormEvent, useCallback, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import {  useRouteMatch, useLocation } from "react-router-dom";
 
 import background from "../../assets/images-v2/Proffy.png";
-import voltar from "../../assets/images-v2/Voltar.png";
+ 
 
 import InputUser from "../../components/InputUser";
 
 import "./styles.css";
 import { FormFields } from "../../utils/FormField";
 import api from "../../services/api";
+import { useToast } from "../../hooks/toast";
+
+interface PropsToken {
+  token: string;
+}
 
 const inputsFields = {
   password: {
@@ -22,24 +27,45 @@ const inputsFields = {
 const Reset: React.FC = () => {
   const [fields, setFields] = useState<FormFields>(inputsFields as FormFields);
   const [formValid, setFormValid] = useState(false);
-  const location = useLocation();
-  
+  const { addToast } = useToast();
+  const { search  } = useLocation();
+
   const handleSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
 
-      // const token = params.resetPasswordToken;
+      const [_,token] = search.split('=');
+ 
 
-        // if (!token) {
-        //   throw new Error();
-        // }
+      if (token) {
+ 
+        api
+          .post(`reset/${token}`, {
+            password: fields.password.value,
+          })
+          .then((response) => {
 
-        // console.log('token', token)
-
-
-      console.log()
+            console.log('response: ', response);
+            addToast({
+              type: "success",
+              title: "Resetado com sucesso.",
+              description: "Redirecionando para pagina Inicial!",
+            });
+          })
+          .catch((err) => {
+            addToast({
+              type: "error",
+              title: "Erro ao tentar mudar o password.",
+            });
+          });
+      } else {
+        addToast({
+          type: "error",
+          title: "Token não existe.",
+        });
+      }
     },
-    []
+    [addToast, fields.password.value, search]
   );
 
   function onInputValueChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -82,13 +108,9 @@ const Reset: React.FC = () => {
   }
 
   return (
-    <div id="page-forgot">
-      <div className="container" id="page-forgot-content">
+    <div id="page-reset">
+      <div className="container" id="page-reset-content">
         <div className="form-content">
-          <Link to="/">
-            <img className="back" src={voltar} alt="voltar" />
-          </Link>
-
           <form onSubmit={handleSubmit}>
             <h1>Reset</h1>
             <h2>Reset seu password.</h2>
@@ -102,14 +124,16 @@ const Reset: React.FC = () => {
               placeholder="Password"
               label="Password"
             />
-
-            <button name="submit" type="submit">
+            <button
+              disabled={!fields.password.valid}
+              name="submit"
+              type="submit"
+            >
               Resetar
             </button>
           </form>
         </div>
-
-        <div className="background-container">
+        <div className="background-container-reset">
           <img src={background} alt="logo" />
         </div>
       </div>

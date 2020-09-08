@@ -5,41 +5,20 @@
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
- 
 }
 
-.background-container {
+#page-signin .background-container {
   width: 100vw;
 }
 
-@media (max-height: 500px) {
-
-    .background-container img {
-     display: none;
-    }
-
-    .form-content { 
-        margin-top: 0rem;
-        max-height: 100vh;
-    
-    }
-
-    .h1{
-        display: block;
-        border: 1px solid black;
-      }
-}
-
-.background-container img {
-  
+#page-signin .background-container img {
   height: 21vh !important;
   object-fit: cover !important;
   padding-bottom: 4vh;
   width: 100vw !important;
-
 }
 
-.form-content {
+#page-signin .form-content {
   margin-top: 16vh;
   display: flex;
   justify-content: center;
@@ -48,7 +27,7 @@
   max-height: 34vh;
 }
 
-.form-content form {
+#page-signin .form-content form {
   margin-top: 8rem;
   display: flex;
   width: 100%;
@@ -56,19 +35,19 @@
   padding: 0 5rem;
 }
 
-h1 + #input-user {
+#page-signin h1 + #input-user {
   margin-top: 3rem;
 }
 
-#input-user + div {
+#page-signin #input-user + div {
   margin-bottom: 3rem;
 }
 
-.form-content h1 {
+#page-signin .form-content h1 {
   color: var(--color-title-sin);
 }
 
-.form-option-content {
+#page-signin .form-option-content {
   display: flex;
   align-items: center;
   margin-top: 2rem;
@@ -76,21 +55,24 @@ h1 + #input-user {
   flex-wrap: wrap;
 }
 
-.form-option-content .form-option-save {
+#page-signin .form-option-content .form-option-save {
   display: flex;
   align-items: center;
   flex-direction: row;
   white-space: nowrap;
 }
 
-.form-option-content .form-option-save input[type="checkbox"] {
+#page-signin .form-option-content .form-option-save input[type="checkbox"] {
   position: relative;
   cursor: pointer;
   display: flex;
   margin-right: 30px;
 }
 
-.form-option-content .form-option-save input[type="checkbox"]:before {
+#page-signin
+  .form-option-content
+  .form-option-save
+  input[type="checkbox"]:before {
   content: "";
   display: block;
   position: absolute;
@@ -102,7 +84,10 @@ h1 + #input-user {
   border-radius: 4px;
 }
 
-.form-option-content .form-option-save input[type="checkbox"]:checked:before {
+#page-signin
+  .form-option-content
+  .form-option-save
+  input[type="checkbox"]:checked:before {
   content: "";
   display: block;
   position: absolute;
@@ -113,7 +98,10 @@ h1 + #input-user {
   background-color: var(--color-secundary);
 }
 
-.form-option-content .form-option-save input[type="checkbox"]:checked:after {
+#page-signin
+  .form-option-content
+  .form-option-save
+  input[type="checkbox"]:checked:after {
   content: "";
   display: block;
   width: 5px;
@@ -128,23 +116,23 @@ h1 + #input-user {
   left: 6px;
 }
 
-.form-option-content .form-option-save label {
+#page-signin .form-option-content .form-option-save label {
   margin-top: 8px !important;
   white-space: nowrap;
 }
 
-.form-option-content .forgot {
+#page-signin .form-option-content .forgot {
   margin-top: 8px !important;
   cursor: pointer;
   text-decoration: none;
   color: var(--color-text-complement);
 }
 
-.form-option-content .forgot:hover {
+#page-signin .form-option-content .forgot:hover {
   color: var(--color-primary);
 }
 
-.form-content button {
+#page-signin .form-content button {
   margin-top: 1rem;
   background-color: var(--color-title-sin-button);
   color: var(--color-text-complement);
@@ -155,18 +143,18 @@ h1 + #input-user {
   outline: none;
 }
 
-.form-content button:enabled:hover {
+#page-signin .form-content button:enabled:hover {
   color: var(--color-title-in-primary);
   background-color: var(--color-secundary-dark);
 }
 
-.form-content button:enabled {
+#page-signin .form-content button:enabled {
   background-color: var(--color-secundary);
   color: var(--color-button-text);
   cursor: pointer;
 }
 
-.form-footer {
+#page-signin .form-footer {
   margin-top: 10rem;
   display: flex;
   justify-content: space-between;
@@ -174,9 +162,30 @@ h1 + #input-user {
   flex-wrap: wrap;
 }
 
-.form-footer .form-footer-register {
+#page-signin .form-footer .form-footer-register {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 400px) {
+  #page-signin   {
+    font-size: 0.9rem;
+  }
+  #page-signin h1 {
+    font-size: 2.2rem;
+  }
+  #page-signin h2 {
+    font-size: 1.2rem;
+  }
+  #page-signin .form-content form {
+    padding: 0 1rem;
+  }
+
+  #page-signin .background-container-reset {
+    display: none;
+  }
+
+  
 }
 
 @media (min-width: 900px) {
@@ -186,20 +195,20 @@ h1 + #input-user {
     width: 100vw;
     height: 100vh;
   }
-  .form-content {
+  #page-signin .form-content {
     margin-top: 0rem;
     display: flex;
     width: 650px;
     max-height: 100vh;
   }
-  .form-content form {
+  #page-signin .form-content form {
     margin-top: 1rem;
     display: flex;
     width: 650px;
     flex-direction: column;
     padding: 0 8rem;
   }
-  .background-container {
+  #page-signin .background-container {
     background-color: var(--color-primary);
     width: calc(100vw - 650px) !important;
     height: 100vh !important;
@@ -208,13 +217,12 @@ h1 + #input-user {
     align-items: center;
     justify-content: center;
   }
-  .background-container img {
+  #page-signin .background-container img {
     width: calc(100vw - 650px) !important;
     height: 80vh !important;
     object-fit: cover !important;
- 
   }
-  .form-footer {
+  #page-signin .form-footer {
     margin-top: 8rem;
     display: flex;
     justify-content: space-between;

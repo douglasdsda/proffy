@@ -19,7 +19,7 @@ function Routes() {
       <Route path="/Forgot" component={Forgot}  />
       <Route path="/SignUp" component={SignUp}  />
       <Route path="/UserCreated" component={UserCreated}  />
-      <Route path="/Reset/:token" component={Reset}  />
+      <Route path="/Reset" component={Reset}  />
       
       <Route isPrivate  path="/Landing" component={Landing}  />
       <Route isPrivate  path="/CreatedShedule" component={CreatedShedule}  />

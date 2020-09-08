@@ -1,5 +1,5 @@
 import React, { FormEvent, useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import background from "../../assets/images-v2/Proffy.png";
 import voltar from "../../assets/images-v2/Voltar.png";
@@ -8,6 +8,8 @@ import InputUser from "../../components/InputUser";
 
 import "./styles.css";
 import { FormFields } from "../../utils/FormField";
+import api from "../../services/api";
+import { useToast } from "../../hooks/toast";
 
 const inputsFields = {
   email: {
@@ -29,15 +31,36 @@ const Forgot: React.FC = () => {
   const [fields, setFields] = useState<FormFields>(inputsFields as FormFields);
   const [formValid, setFormValid] = useState(false);
 
+  const { addToast } = useToast();
+
   const handleSignin = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
 
-      console.log({
-        fields,
-      });
+      api
+        .post("forgot", {
+          email: fields.email.value,
+        })
+        .then((response) => {
+          console.log("response: ", response);
+
+          addToast({
+            type: "success",
+            title: "Reset realizado com sucesso.",
+            description: "Verifique seu e-mail!",
+          });
+          setFields(inputsFields)
+        })
+        .catch((err) => {
+          console.log("err:", err);
+          addToast({
+            type: "error",
+            title: "Ocorreu algum erro ao tentar.",
+            description: "Problema com e-mail",
+          });
+        });
     },
-    [fields]
+    [addToast, fields.email.value]
   );
 
   function onInputValueChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -100,13 +123,13 @@ const Forgot: React.FC = () => {
               label="E-mail"
             />
 
-            <button name="submit" type="submit">
+            <button disabled={!fields.email.valid} name="submit" type="submit">
               Enviar
             </button>
           </form>
         </div>
 
-        <div className="background-container">
+        <div className="background-container-forgot">
           <img src={background} alt="logo" />
         </div>
       </div>

@@ -1,124 +1,166 @@
 #page-forgot {
-    color: var(--color-text-complement);
-    background-color: var(--color-background);
-    transition: background-color 0.2s;
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
+  color: var(--color-text-complement);
+  background-color: var(--color-background);
+  transition: background-color 0.2s;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
-#page-forgot .back {
-    cursor: pointer;
-    position: fixed;
-    top: 32rem;
-    left: 8rem;
+#page-forgot-content {
+  display: flex;
+
+  flex-direction: column-reverse;
+}
+
+#page-forgot a {
+  margin-top: 6rem;
+  display: inline-block;
+  margin: 0 auto;
+}
+#page-forgot a .back {
+  cursor: pointer;
 }
 
 #page-forgot .back:hover {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
-#page-forgot .background-container {
-    width: 100vw;
+#page-forgot .background-container-forgot {
+  max-height: 25rem !important;
+  width: 100%;
 }
-
-#page-forgot .background-container img {
-    position: fixed;
-    top: 0;
-    width: 100vw !important;
-    height: 30vh !important;
-    object-fit: cover !important;
+#page-forgot .background-container-forgot img {
+  height: 25rem !important;
+  width: 100vw;
+  object-fit: cover !important;
 }
 
 #page-forgot .form-content {
-    margin-top: 35rem;
+  display: flex;
+  flex-direction: column;
 }
 
 #page-forgot .form-content form {
-    margin-top: 8rem;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    padding: 0 8rem;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 5rem;
 }
 
 #page-forgot h1 {
-    margin-top: 0.5rem;
-    font-size: 45px;
+  margin-top: 0.5rem;
+  font-size: 45px;
 }
 
 #page-forgot h2 {
-    margin-top: 0.5rem;
-    font-size: 15px;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+  margin-top: 0.5rem;
+  font-size: 15px;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
-#page-forgot h1+.input-user {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+#page-forgot h1 + .input-user {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-#page-forgot .input-user+div {
-    margin-bottom: 3rem;
+#page-forgot .input-user + div {
+  margin-bottom: 3rem;
 }
 
 #page-forgot .form-content h1 {
-    color: var(--color-title-sin);
+  color: var(--color-title-sin);
 }
 
 #page-forgot .form-content button {
-    margin-top: 1rem;
-    background-color: var(--color-title-sin-button);
-    color: var(--color-text-complement);
-    border: 0;
-    border-radius: 7px;
-    text-align: center;
-    padding: 2rem;
-    cursor: pointer;
-    outline: none;
-    margin-top: 3rem;
+  display: block;
+  margin-top: 1rem;
+  background-color: var(--color-title-sin-button);
+  color: var(--color-text-complement);
+  border: 0;
+  border-radius: 7px;
+  text-align: center;
+  padding: 2rem;
+
+  outline: none;
+  margin-bottom: 3rem;
 }
 
-#page-forgot .form-content button:hover {
-    color: var(--color-title-in-primary);
-    background-color: var(--color-secundary);
+#page-forgot .form-content button:enabled:hover {
+  color: var(--color-title-in-primary);
+  background-color: var(--color-secundary-dark);
+  cursor: pointer;
 }
+
+#page-forgot .form-content button:enabled {
+  background-color: var(--color-secundary);
+  color: var(--color-button-text);
+  cursor: pointer;
+  cursor: pointer;
+}
+
+/* @media (max-width: 400px) {
+  #page-forgot h1 {
+    font-size: 3rem;
+  }
+  #page-forgot h2 {
+    font-size: 1.2rem;
+  }
+  #page-forgot .form-content form {
+    padding: 0 3rem;
+  }
+
+  #page-forgot .background-container-reset {
+    max-height: 20rem;
+  }
+
+  #page-forgot a {
+    margin-top: 9rem;
+  }
+} */
 
 @media (min-width: 900px) {
-    #page-forgot-content {
-        display: flex;
-        flex-direction: row;
-        width: 100vw;
-        height: 100vh;
-    }
-    #page-forgot .form-content {
-        margin-top: 0rem;
-        display: flex;
-        width: 650px;
-        max-height: 100vh;
-    }
-    #page-forgot .back {
-        margin-top: 0rem;
-        justify-self: self-start;
-        cursor: pointer;
-        top: 1em;
-        left: 8rem;
-    }
-    #page-forgot .form-content form {
-        display: flex;
-        width: 650px;
-        flex-direction: column;
-        padding: 0 8rem;
-    }
-    #page-forgot .background-container {
-        display: block;
-        height: 100vh;
-        border: 1px solid black;
-    }
-    #page-forgot .background-container img {
-        width: calc(100vw - 650px) !important;
-        object-fit: fill !important;
-        height: 100% !important;
-    }
+  #page-forgot-content {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+ 
+  }
+
+  #page-forgot .form-content {
+    margin-top: 0rem;
+    display: flex;
+    width: 650px;
+    flex-direction: column;
+ 
+  }
+
+  #page-forgot a {
+    cursor: pointer;
+    margin: 4rem auto;
+  }
+
+  #page-forgot .form-content form {
+    display: flex;
+    width: 650px;
+    flex-direction: column;
+    padding: 0 8rem;
+  }
+ 
+
+  
+
+  #page-forgot .background-container-forgot  {
+    max-height: 100vh;
+    display: block;
+    height: 100vh;
+ 
+  }
+  #page-forgot .background-container-forgot img {
+    width: calc(100vw - 650px) !important;
+    object-fit: fill !important;
+    height: 100vh !important;
+  }
 }
