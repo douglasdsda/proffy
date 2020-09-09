@@ -5,6 +5,8 @@ import studyIcon from "../../assets/images/icons/study.svg";
 import giveClassesIcon from "../../assets/images/icons/give-classes.svg";
 import purpleHeartIcon from "../../assets/images/icons/purple-heart.svg";
 import sair from "../../assets/images-v2/Sair.svg";
+import userImgNotfound from "../../assets/images-v2/user.png";
+ 
  
 
 import { Link, useHistory } from "react-router-dom";
@@ -35,7 +37,7 @@ function Landing() {
         <div className="container-title">
           <div className="landing-content-profile">
             <div className="landing-profile">
-              <img onClick={handleProfile}  src={user.avatar} alt={user.name} />
+              <img onClick={handleProfile}  src={user.avatar ? user.avatar : userImgNotfound} alt={user.name} />
               <span>{user.name}</span>
             </div>
             <img onClick={signOut} src={sair} alt="Sair"/>

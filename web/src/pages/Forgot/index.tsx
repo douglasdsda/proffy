@@ -1,5 +1,5 @@
 import React, { FormEvent, useCallback, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import background from "../../assets/images-v2/Proffy.png";
 import voltar from "../../assets/images-v2/Voltar.png";

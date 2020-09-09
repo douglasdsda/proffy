@@ -47,6 +47,7 @@
   width: 40px !important;
   cursor: pointer;
   transition: opacity 0.2s;
+  background:  var(--color-primary);
 }
 
 .landing-content-profile img:hover {
@@ -67,7 +68,7 @@
 .buttons-container {
   display: flex;
   justify-content: center;
-  margin: 3x2rem 0;
+  margin: 3px 2rem 0;
 }
 
 .buttons-container a {

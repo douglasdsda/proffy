@@ -28,7 +28,6 @@ function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [sobrenome, SetSobrenome] = useState("");
-  const [avatar, setAvatar] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [bio, setBio] = useState("");
 
@@ -101,7 +100,6 @@ function Profile() {
       name,
       sobrenome,
       email,
-      avatar,
       whatsapp: removePhoneMask({ value: whatsapp }),
       bio,
       subject,
@@ -114,7 +112,6 @@ function Profile() {
         name,
         email,
         sobrenome,
-        avatar,
         whatsapp,
         bio,
         subject,
@@ -127,7 +124,6 @@ function Profile() {
           name,
           sobrenome,
           email,
-          avatar,
           whatsapp: removePhoneMask({ value: whatsapp }),
           bio,
           id: user.id,

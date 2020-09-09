@@ -15,7 +15,7 @@ import { useAuth } from "../../hooks/auth";
 const inputsFields = {
   email: {
     value: "",
-    validation: /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/,
+    validation: /\S+@\S+\.\S+/,
     valid: false,
     touched: false,
   },

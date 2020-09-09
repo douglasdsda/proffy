@@ -25,12 +25,12 @@ interface SheduleDTO {
 function TeacherForm() {
   const history = useHistory();
 
-  const { user, updateUser } = useAuth();
+  const { user } = useAuth();
 
-  const [name, setName] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
-  const [email, setEmail] = useState("");
-  const [avatar, setAvatar] = useState("");
+  // const [name, setName] = useState("");
+  // const [sobrenome, setSobrenome] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [avatar, setAvatar] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [bio, setBio] = useState("");
 
@@ -47,12 +47,12 @@ function TeacherForm() {
 
       const { classes, shedule } = await response.data;
 
-      setBio(user?.bio || "");
+      // setBio(user?.bio || "");
 
      
       
  
-      setWhatsapp(user?.whatsapp || "");
+      // setWhatsapp(user?.whatsapp || "");
       setCost(classes?.cost || "");
       setSubject(classes?.subject || "");
 
@@ -70,7 +70,7 @@ function TeacherForm() {
     };
 
     load();
-  }, [user]);
+  }, [ ]);
 
 
   function addNewScheduleItem() {
@@ -102,10 +102,10 @@ function TeacherForm() {
     e.preventDefault();
 
     console.log({
-      name,
-      sobrenome,
-      email,
-      avatar,
+      // name,
+      // sobrenome,
+      // email,
+      // avatar,
       whatsapp: removePhoneMask({ value: whatsapp }),
       bio,
       subject,
@@ -115,10 +115,10 @@ function TeacherForm() {
 
     api
       .post("shedules", {
-        name,
-        email,
-        sobrenome,
-        avatar,
+        // name,
+        // email,
+        // sobrenome,
+        // avatar,
         whatsapp,
         bio,
         subject,

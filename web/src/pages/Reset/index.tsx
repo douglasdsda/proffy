@@ -1,5 +1,5 @@
 import React, { FormEvent, useCallback, useState } from "react";
-import { useRouteMatch, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 import background from "../../assets/images-v2/Proffy.png";
 
@@ -34,7 +34,7 @@ const Reset: React.FC = () => {
     (e: FormEvent) => {
       e.preventDefault();
 
-      const [_, token] = search.split("=");
+      const [, token] = search.split("=");
 
       if (token) {
         api
