@@ -5,7 +5,7 @@ import { container } from 'tsyringe';
 import UpdateProfile from '../services/Users/UpdateProfile';
 
 export default class ClassesController {
-    public async create(req: Request, res: Response) {
+    public async create(req: Request, res: Response): Promise<Response> {
         const {
             name,
             email,

@@ -9,7 +9,7 @@ export default interface IUsersTokensRepository {
 
     findByToken(token: string): Promise<UserToken | undefined>;
 
-    save(userToken: ICreateUserTokenDTO): Promise<string>;
+    save(userToken: ICreateUserTokenDTO): Promise<UserToken>;
 
     update(updateUserDTO: IUpdateUserDTO): Promise<void>;
 

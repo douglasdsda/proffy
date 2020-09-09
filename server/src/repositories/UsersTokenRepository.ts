@@ -52,16 +52,23 @@ class UsersTokensRepository implements IUsersTokensRepository {
         return userToken || undefined;
     }
 
-    public async save(userToken: ICreateUserTokenDTO): Promise<string> {
+    public async save({
+        user_id,
+        token,
+    }: ICreateUserTokenDTO): Promise<UserToken> {
+        const userToken = new UserToken();
+
+        Object.assign(userToken, { user_id, token });
+
         await db('users_tokens').insert(userToken);
 
-        return userToken.hash;
+        return userToken;
     }
 
     public async update(updateUserDTO: IUpdateUserDTO): Promise<void> {
         if (updateUserDTO && updateUserDTO.user_id) {
             await db('users_tokens')
-                .update({ token: updateUserDTO.hash })
+                .update({ token: updateUserDTO.token })
                 .where('user_id', '=', updateUserDTO.user_id);
         }
     }

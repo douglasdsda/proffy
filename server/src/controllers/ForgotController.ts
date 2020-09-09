@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 import ForgotService from '../services/Users/ForgotService';
 
 export default class ForgotController {
-    public async create(req: Request, res: Response) {
+    public async create(req: Request, res: Response): Promise<Response> {
         const { email } = req.body;
 
         const forgot = container.resolve(ForgotService);

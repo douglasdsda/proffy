@@ -1,4 +1,4 @@
 export default interface IUpdateUserDTO {
-    hash: string;
+    token: string;
     user_id?: number;
 }

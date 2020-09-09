@@ -7,7 +7,7 @@ export default class ConnectionsController {
         return res.status(200).json({ total: connections.length, connections });
     }
 
-    public async create(req: Request, res: Response) {
+    public async create(req: Request, res: Response): Promise<Response> {
         const { user_id } = req.body;
 
         await db('connections').insert({ user_id });

@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { hash } from 'bcryptjs';
-import { isAfter, addHours } from 'date-fns';
+import { isAfter, addHours, parseISO } from 'date-fns';
 import db from '../database/connection';
 
 export default class ResetPasswordController {
-    public async create(req: Request, res: Response) {
-        const { token, new_password } = req.body;
+    public async create(req: Request, res: Response): Promise<Response> {
+        const { password } = req.body;
+        const { token } = req.params;
+
         try {
             const userToken = await db('users_tokens')
                 .select('*')
@@ -13,7 +15,7 @@ export default class ResetPasswordController {
                 .first();
 
             if (userToken) {
-                const tokenCreated = userToken.created_at;
+                const tokenCreated = parseISO(userToken.created_at);
 
                 const compareDate = addHours(tokenCreated, 2);
 
@@ -23,7 +25,7 @@ export default class ResetPasswordController {
 
                 const { user_id } = userToken;
 
-                const passwordhash = await hash(new_password, 8);
+                const passwordhash = await hash(password, 8);
 
                 await db('users').where('id', '=', user_id).update({
                     password: passwordhash,
@@ -33,7 +35,7 @@ export default class ResetPasswordController {
                     .delete('*')
                     .where('user_id', '=', user_id);
 
-                return res.status(200).json({ status: 'OK' });
+                return res.status(200).send();
             }
             return res.status(400).json({
                 error: 'token is invalid, token used.',

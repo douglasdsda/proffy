@@ -30,15 +30,15 @@ class ForgotService {
             findUser.id,
         );
 
-        if (!findUsersTokens) {
-            await this.usersTokensRepository.save({
-                hash: hashedEmail,
-                user_id: findUser.id,
-            });
-        } else {
+        if (findUsersTokens && findUsersTokens.id) {
             await this.usersTokensRepository.update({
                 user_id: findUser.id,
-                hash: hashedEmail,
+                token: hashedEmail,
+            });
+        } else {
+            await this.usersTokensRepository.save({
+                token: hashedEmail,
+                user_id: findUser.id,
             });
         }
 
