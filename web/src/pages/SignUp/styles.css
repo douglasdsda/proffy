@@ -1,215 +1,218 @@
 #page-signup {
-    color: var(--color-text-complement);
-    background-color: var(--color-background);
-    transition: background-color 0.2s;
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
+  color: var(--color-text-complement);
+  background-color: var(--color-background);
+  transition: background-color 0.2s;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 #page-signup .background-container {
-    display: none;
+  display: none;
 }
 
 #page-signup .background-container img {
-    width: 100vw !important;
-    height: 20vh !important;
-    object-fit: cover !important;
+  width: 100vw !important;
+  height: 20vh !important;
+  object-fit: cover !important;
 }
 
 #page-signup .form-content {
-    margin-top: 10rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    max-height: 35vh;
-    flex-direction: column;
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  max-height: 35vh;
+  flex-direction: column;
 }
 
 #page-signup .form-content .voltar {
-    margin-top: 15rem;
-    height: 44px;
-    align-self: flex-start;
-    padding: 0 5rem;
-    margin-bottom: 4rem;
+  margin-top: 25rem;
+  height: 44px;
+  align-self: flex-start;
+  padding: 0 5rem;
+  margin-bottom: 4rem;
 }
 
 #page-signup .form-content form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    padding: 0 5rem;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 5rem;
 }
 
-#page-signup h1+#input-user {
-    margin-top: 3rem;
+#page-signup h1 + #input-user {
+  margin-top: 3rem;
 }
 
 #page-signup .form-content form h2 {
-    margin-top: 2rem;
-    font-size: 1.6rem;
-    margin-bottom: 2rem;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
 }
 
-#input-user+div {
-    margin-bottom: 3rem;
+#input-user + div {
+  margin-bottom: 3rem;
 }
 
 #page-signup .form-content h1 {
-    color: var(--color-title-sin);
+  color: var(--color-title-sin);
 }
 
 #page-signup .form-option-content {
-    display: flex;
-    align-items: center;
-    margin-top: 2rem;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  justify-content: space-between;
 }
 
 #page-signup .form-option-content .form-option-save {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    white-space: nowrap;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  white-space: nowrap;
 }
 
 #page-signup .form-option-content .form-option-save input[type="checkbox"] {
-    position: relative;
-    cursor: pointer;
-    display: flex;
-    margin-right: 30px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  margin-right: 30px;
 }
 
-#page-signup .form-option-content .form-option-save input[type="checkbox"]:before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 0;
-    left: 0;
-    background-color: var(--color-text-complement);
-    border-radius: 4px;
+#page-signup
+  .form-option-content
+  .form-option-save
+  input[type="checkbox"]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  background-color: var(--color-text-complement);
+  border-radius: 4px;
 }
 
-#page-signup .form-option-content .form-option-save input[type="checkbox"]:checked:before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 0;
-    left: 0;
-    background-color: var(--color-secundary);
+#page-signup
+  .form-option-content
+  .form-option-save
+  input[type="checkbox"]:checked:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  left: 0;
+  background-color: var(--color-secundary);
 }
 
-#page-signup .form-option-content .form-option-save input[type="checkbox"]:checked:after {
-    content: "";
-    display: block;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-    position: absolute;
-    top: 2px;
-    left: 6px;
+#page-signup
+  .form-option-content
+  .form-option-save
+  input[type="checkbox"]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
+  left: 6px;
 }
 
 #page-signup .form-option-content .form-option-save label {
-    margin-top: 8px !important;
-    white-space: nowrap;
+  margin-top: 8px !important;
+  white-space: nowrap;
 }
 
 #page-signup .form-option-content .forgot {
-    margin-top: 8px !important;
-    cursor: pointer;
-    text-decoration: none;
-    color: var(--color-text-complement);
+  margin-top: 8px !important;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-text-complement);
 }
 
 #page-signup .form-option-content .forgot:hover {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 #page-signup .form-content button {
-    margin-top: 3rem;
-    background-color: var(--color-title-sin-button);
-    color: var(--color-text-complement);
-    border: 0;
-    border-radius: 7px;
-    text-align: center;
-    padding: 2rem;
-    outline: none;
-    margin-bottom: 4rem;
+  margin-top: 3rem;
+  background-color: var(--color-title-sin-button);
+  color: var(--color-text-complement);
+  border: 0;
+  border-radius: 7px;
+  text-align: center;
+  padding: 2rem;
+  outline: none;
+  margin-bottom: 4rem;
 }
 
 #page-signup .form-content button:enabled:hover {
-    color: var(--color-title-in-primary);
-    background-color: var(--color-secundary-dark);
+  color: var(--color-title-in-primary);
+  background-color: var(--color-secundary-dark);
 }
 
 #page-signup .form-content button:enabled {
-    background-color: var(--color-secundary);
-    color: var(--color-button-text);
-    cursor: pointer;
+  background-color: var(--color-secundary);
+  color: var(--color-button-text);
+  cursor: pointer;
 }
 
 #page-signup .form-footer {
-    margin-top: 10rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  margin-top: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #page-signup .form-footer .form-footer-register {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 1100px) {
-    #page-signup-content {
-        display: flex;
-        flex-direction: row;
-        width: 100vw;
-        height: 100vh;
-    }
-    #page-signup .form-content {
-        margin-top: 0rem;
-        display: flex;
-        width: 650px;
-        max-height: 100vh;
-    }
-    #page-signup .form-content .voltar {
-        cursor: pointer;
-        position: fixed;
-        top: -13rem;
-        right: 47rem;
-    }
-    #page-signup .form-content form {
-        margin-top: 1rem;
-        display: flex;
-        width: 650px;
-        flex-direction: column;
-        padding: 0 8rem;
-    }
-    #page-signup .background-container {
-        display: block;
-        height: 100vh;
-        border: 1px solid black;
-    }
-    #page-signup .background-container img {
-        width: calc(100vw - 650px) !important;
-        object-fit: cover !important;
-        height: 100% !important;
-    }
-    #page-signup .form-footer {
-        margin-top: 8rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+  #page-signup-content {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+  }
+  #page-signup .form-content {
+    display: flex;
+    width: 650px;
+  }
+  #page-signup .form-content .voltar {
+    padding: 0 8rem;
+    margin-bottom: 4rem;
+  }
+  #page-signup .form-content form {
+    display: flex;
+    width: 650px;
+    flex-direction: column;
+    padding: 0 8rem;
+  }
+  #page-signup .background-container {
+    display: block;
+    height: 100vh;
+  }
+  #page-signup .background-container img {
+    width: calc(100vw - 650px) !important;
+    object-fit: cover !important;
+    height: 100vh !important;
+  }
+  #page-signup .form-footer {
+    margin-top: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

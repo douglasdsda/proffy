@@ -1,8 +1,7 @@
 import React, { FormEvent, useCallback, useState } from "react";
-import {  useRouteMatch, useLocation } from "react-router-dom";
+import { useRouteMatch, useLocation, useHistory } from "react-router-dom";
 
 import background from "../../assets/images-v2/Proffy.png";
- 
 
 import InputUser from "../../components/InputUser";
 
@@ -28,29 +27,29 @@ const Reset: React.FC = () => {
   const [fields, setFields] = useState<FormFields>(inputsFields as FormFields);
   const [formValid, setFormValid] = useState(false);
   const { addToast } = useToast();
-  const { search  } = useLocation();
+  const { search } = useLocation();
+  const history = useHistory();
 
   const handleSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
 
-      const [_,token] = search.split('=');
- 
+      const [_, token] = search.split("=");
 
       if (token) {
- 
         api
           .post(`reset/${token}`, {
             password: fields.password.value,
           })
           .then((response) => {
-
-            console.log('response: ', response);
+            console.log("response: ", response);
             addToast({
               type: "success",
               title: "Resetado com sucesso.",
               description: "Redirecionando para pagina Inicial!",
             });
+
+            history.push("/");
           })
           .catch((err) => {
             addToast({
@@ -65,7 +64,7 @@ const Reset: React.FC = () => {
         });
       }
     },
-    [addToast, fields.password.value, search]
+    [addToast, fields.password.value, history, search]
   );
 
   function onInputValueChange(e: React.ChangeEvent<HTMLInputElement>) {

@@ -16,8 +16,9 @@
 #page-forgot a {
   margin-top: 6rem;
   display: inline-block;
-  margin: 0 auto;
+  padding: 0 5rem;
 }
+
 #page-forgot a .back {
   cursor: pointer;
 }
@@ -28,7 +29,7 @@
 
 #page-forgot .background-container-forgot {
   max-height: 25rem !important;
-  width: 100%;
+  width: 100vw;
 }
 #page-forgot .background-container-forgot img {
   height: 25rem !important;
@@ -43,7 +44,7 @@
 
 #page-forgot .form-content form {
   display: flex;
-  width: 100%;
+  width: 100vw;
   flex-direction: column;
   padding: 0 5rem;
 }
@@ -100,25 +101,32 @@
   cursor: pointer;
 }
 
-/* @media (max-width: 400px) {
+@media (max-width: 380px) {
   #page-forgot h1 {
     font-size: 3rem;
   }
   #page-forgot h2 {
     font-size: 1.2rem;
-  }
-  #page-forgot .form-content form {
-    padding: 0 3rem;
+    margin-top: 2rem;
   }
 
-  #page-forgot .background-container-reset {
-    max-height: 20rem;
+  #page-forgot .form-content form {
+    padding: 8rem 4rem;
   }
 
   #page-forgot a {
-    margin-top: 9rem;
+    margin-top: 3rem;
+    padding: 0 5rem;
   }
-} */
+
+  #page-forgot .background-container-forgot {
+    max-height: 10rem !important;
+    width: 100vw;
+  }
+  #page-forgot .background-container-forgot img {
+    height: 10rem !important;
+  }
+}
 
 @media (min-width: 900px) {
   #page-forgot-content {
@@ -126,7 +134,6 @@
     flex-direction: row;
     width: 100vw;
     height: 100vh;
- 
   }
 
   #page-forgot .form-content {
@@ -134,12 +141,12 @@
     display: flex;
     width: 650px;
     flex-direction: column;
- 
   }
 
   #page-forgot a {
     cursor: pointer;
-    margin: 4rem auto;
+    
+    padding: 0 8rem;
   }
 
   #page-forgot .form-content form {
@@ -147,16 +154,13 @@
     width: 650px;
     flex-direction: column;
     padding: 0 8rem;
+    margin: auto 0;
   }
- 
 
-  
-
-  #page-forgot .background-container-forgot  {
+  #page-forgot .background-container-forgot {
     max-height: 100vh;
     display: block;
     height: 100vh;
- 
   }
   #page-forgot .background-container-forgot img {
     width: calc(100vw - 650px) !important;
