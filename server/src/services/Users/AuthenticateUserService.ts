@@ -43,6 +43,9 @@ class AuthenticateUserService {
 
         const { secret, expiresIn } = authConfig.jwt;
 
+        if (user.avatar)
+            user.avatar_url = `${process.env.APP_API_URL}/files/${user.avatar}`;
+
         const token = sign({}, secret, {
             subject: user?.id?.toString(),
             expiresIn,

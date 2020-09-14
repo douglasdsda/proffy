@@ -90,6 +90,9 @@ class UpdateProfile {
             if (listInsert.length > 0)
                 this.shedulesRepository.save(listInsert, classes.id);
         }
+
+        if (user.avatar)
+            user.avatar_url = `${process.env.APP_API_URL}/files/${user.avatar}`;
         return { user, classes, schedule };
     }
 }

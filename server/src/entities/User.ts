@@ -18,4 +18,6 @@ export default class User {
     created_at?: string;
 
     updated_at?: string;
+
+    avatar_url?: string;
 }

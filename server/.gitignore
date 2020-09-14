@@ -29,3 +29,7 @@ dist/
 
 tmp/uploads/*
 !tmp/uploads/.gitkeep
+
+
+tmp/*
+!tmp/.gitkeep
