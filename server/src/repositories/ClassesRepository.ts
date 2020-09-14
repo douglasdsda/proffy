@@ -70,13 +70,13 @@ class ClassesRepository implements ICLassesRepository {
     }
 
     public async save(data: ICreateClasses): Promise<Classes> {
-        await db('users').insert(data);
+        const id = await db('classes').insert(data);
 
         const classes = new Classes();
 
-        Object.assign(classes, { ...data });
+        Object.assign(classes, { ...data, id: id[0] });
 
-        return classes || undefined;
+        return { ...classes } || undefined;
     }
 
     public async update({
@@ -85,7 +85,7 @@ class ClassesRepository implements ICLassesRepository {
         user_id,
         id,
     }: ICreateClasses): Promise<Classes> {
-        const idSaved = await db('classes')
+        await db('classes')
             .update({
                 id,
                 subject,
@@ -95,7 +95,7 @@ class ClassesRepository implements ICLassesRepository {
             .where('user_id', '=', user_id);
 
         const classes = new Classes();
-        Object.assign(classes, { cost, subject, user_id, id: idSaved });
+        Object.assign(classes, { cost, subject, user_id, id });
 
         return classes;
     }

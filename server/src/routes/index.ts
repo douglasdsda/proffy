@@ -6,6 +6,7 @@ import forgotRouter from './users/forgot.routes';
 import connectionsRouter from './users/connections.routes';
 import classesRouter from './users/classes.routes';
 import resetPasswordRouter from './users/resetPassword.routes';
+import shedulesRouter from './Shedules/shedule.routes';
 
 const routes = Router();
 
@@ -15,5 +16,6 @@ routes.use('/forgot', forgotRouter);
 routes.use('/reset', resetPasswordRouter);
 routes.use('/connections', connectionsRouter);
 routes.use('/classes', classesRouter);
+routes.use('/shedules', shedulesRouter);
 
 export default routes;

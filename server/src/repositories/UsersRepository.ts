@@ -4,8 +4,6 @@ import IUsersRepository from '../interfaces/IUsersRepository';
 import db from '../database/connection';
 
 class UsersRepository implements IUsersRepository {
-    constructor() {}
-
     public async findByEmail(email: string): Promise<User | undefined> {
         const userDB = await db('users')
             .select('*')
@@ -44,6 +42,25 @@ class UsersRepository implements IUsersRepository {
         user.id = userDBId[0];
 
         return user || undefined;
+    }
+
+    public async update({
+        email,
+        bio,
+        whatsapp,
+        name,
+        sobrenome,
+        id,
+    }: User): Promise<void> {
+        await db('users')
+            .update({
+                email,
+                bio,
+                whatsapp,
+                name,
+                sobrenome,
+            })
+            .where('id', '=', id);
     }
 }
 

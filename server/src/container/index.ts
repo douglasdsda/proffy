@@ -2,6 +2,8 @@ import { container } from 'tsyringe';
 
 import '../providers';
 
+import ClassesRepository from '../repositories/ClassesRepository';
+import IClassesRepository from '../interfaces/IClassesRepository';
 import UsersTokensRepository from '../repositories/UsersTokenRepository';
 import IUsersTokensRepository from '../interfaces/IUsersTokensRepository';
 import IShedulesRepository from '../interfaces/IShedulesRepository';
@@ -22,4 +24,9 @@ container.registerSingleton<IUsersTokensRepository>(
 container.registerSingleton<IShedulesRepository>(
     'SheduleRepository',
     SheduleRepository,
+);
+
+container.registerSingleton<IClassesRepository>(
+    'classesRepository',
+    ClassesRepository,
 );

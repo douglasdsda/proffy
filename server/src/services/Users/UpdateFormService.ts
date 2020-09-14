@@ -7,10 +7,6 @@ import IUsersRepository from '../../interfaces/IUsersRepository';
 import { ScheduleItem } from '../../entities/Shedule';
 
 interface IRequest {
-    name: string;
-    email: string;
-
-    sobrenome: string;
     whatsapp: string;
     subject: string;
     cost: number;
@@ -19,7 +15,7 @@ interface IRequest {
     schedule: ScheduleItem[];
 }
 @injectable()
-class UpdateProfile {
+class UpdateFormService {
     constructor(
         @inject('UsersRepository')
         private usersRepository: IUsersRepository,
@@ -30,9 +26,6 @@ class UpdateProfile {
     ) {}
 
     public async execute({
-        name,
-        email,
-        sobrenome,
         whatsapp,
         bio,
         subject,
@@ -46,18 +39,10 @@ class UpdateProfile {
             throw new AppError('User not exists');
         }
 
-        const checkUsersExists = await this.usersRepository.findByEmail(email);
-        if (checkUsersExists && checkUsersExists.id)
-            if (checkUsersExists && Number(user_id) !== checkUsersExists.id) {
-                throw new AppError('Email addres alredy used');
-            }
-
-        user.name = name;
-        user.sobrenome = sobrenome;
-        user.email = email;
         user.whatsapp = whatsapp;
         user.bio = bio;
         if (user.id) {
+            console.log('user: ', user);
             await this.usersRepository.update(user);
         } else {
             await this.usersRepository.save(user);
@@ -81,7 +66,6 @@ class UpdateProfile {
         }
 
         if (classes && classes.id) {
-            // await this.shedulesRepository.deleteByClassIdAll(classes.id);
             const listUpdate = schedule.filter(item => item.id !== undefined);
             const listInsert = schedule.filter(item => item.id === undefined);
 
@@ -94,4 +78,4 @@ class UpdateProfile {
     }
 }
 
-export default UpdateProfile;
+export default UpdateFormService;

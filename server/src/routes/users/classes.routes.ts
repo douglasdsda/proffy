@@ -7,6 +7,7 @@ const classesRouter = Router();
 const classesController = new ClassesController();
 
 classesRouter.post('/', ensureAuthenticated, classesController.create);
-// classesRouter.get('/', classesController.index);
+classesRouter.get('/', ensureAuthenticated, classesController.index);
+classesRouter.put('/', ensureAuthenticated, classesController.update);
 
 export default classesRouter;
