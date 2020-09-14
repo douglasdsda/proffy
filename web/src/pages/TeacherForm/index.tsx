@@ -129,7 +129,7 @@ function TeacherForm() {
 
             <div className="line">
               <div className="teacher-info">
-                <img src={user.avatar ? user.avatar : userImgNotfound} alt="" />
+                <img src={user.avatar_url ? user.avatar_url : userImgNotfound} alt="" />
                 <strong>{user.name}</strong>
               </div>
 

@@ -119,4 +119,50 @@
     align-items: center;
     cursor: pointer;
   }
+
+ .page-header .change-avatar {
+  margin-bottom: 32px;
+  position: relative;
+
+  align-self: center;
+ }
+
+
+ .page-header .change-avatar img {
+  width: 186px;
+  height: 186px;
+  border-radius: 50%;
+ }
+
+ .page-header .change-avatar label {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background:  var(--color-secundary);
+
+ 
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  position: absolute;
+
+  transition: background-color 0.2s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+ 
+ .page-header .change-avatar label input {
+  display: none; 
+ }    
+
+ .page-header .change-avatar label svg {
+  width: 20px;
+  height: 20px;
+  color: #312e38;
+ }  
+
 }

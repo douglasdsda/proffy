@@ -44,7 +44,7 @@ function Profile() {
   useEffect(() => {
     const load = async () => {
       const response = await api.get("classes");
-
+        console.log('response profile: ', response.data)
       const { classes, schedule } = await response.data;
 
       setBio(user?.bio || "");
@@ -153,7 +153,7 @@ function Profile() {
   return (
     <div id="page-profile-form" className="container">
       <PageHeader
-        avatar={user.avatar ? user.avatar : userImgNotfound}
+        avatar={user.avatar_url ? user.avatar_url : userImgNotfound}
         title={user.name}
         path="Meu perfil"
         description={user.bio ? user.bio : "sem biografia"}
