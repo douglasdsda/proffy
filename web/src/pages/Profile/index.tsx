@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, useEffect } from "react";
+import React, { FormEvent, useState, useEffect, useCallback } from "react";
 import Input from "../../components/Input";
 import PageHeader from "../../components/PageHeader";
 import warningIcon from "../../assets/images/icons/warning.svg";
@@ -11,6 +11,8 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import { removePhoneMask } from "../../utils/Helper";
 import convertHourToMinutes from "../../utils/convertHourToMinutes";
+import userImgNotfound from "../../assets/images-v2/user.png";
+import { useToast } from "../../hooks/toast";
 
 interface SheduleDTO {
   id?: number;
@@ -24,6 +26,7 @@ interface SheduleDTO {
 function Profile() {
   const history = useHistory();
   const { user, updateUser } = useAuth();
+  const { addToast } = useToast();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,14 +38,14 @@ function Profile() {
   const [cost, setCost] = useState("");
 
   const [scheduleItems, setScheduleItems] = useState([
-    { week_day: 0, from: "", to: "" },
+    { week_day: 0, from: "", to: "", id: undefined },
   ]);
 
   useEffect(() => {
     const load = async () => {
       const response = await api.get("classes");
-      console.log("responde: ", response);
-      const { classes, shedule } = await response.data;
+
+      const { classes, schedule } = await response.data;
 
       setBio(user?.bio || "");
 
@@ -53,8 +56,8 @@ function Profile() {
       setCost(classes?.cost || "");
       setSubject(classes?.subject || "");
 
-      if (shedule) {
-        const formattedShedule = shedule.map((item: SheduleDTO) => {
+      if (schedule) {
+        const formattedShedule = schedule.map((item: SheduleDTO) => {
           return {
             ...item,
             to: convertHourToMinutes(item.to),
@@ -76,6 +79,7 @@ function Profile() {
         week_day: 0,
         from: "",
         to: "",
+        id: undefined,
       },
     ]);
   }
@@ -96,17 +100,6 @@ function Profile() {
   function handleCreateClass(e: FormEvent) {
     e.preventDefault();
 
-    console.log({
-      name,
-      sobrenome,
-      email,
-      whatsapp: removePhoneMask({ value: whatsapp }),
-      bio,
-      subject,
-      cost,
-      scheduleItems,
-    });
-
     api
       .post("classes", {
         name,
@@ -116,10 +109,14 @@ function Profile() {
         bio,
         subject,
         cost: Number(cost),
-        shedule: scheduleItems,
+        schedule: scheduleItems,
       })
       .then(() => {
-        alert("Cadastrado com Sucesso.");
+        addToast({
+          type: "success",
+          title: "Perfil Atualizado com sucesso!",
+        });
+
         updateUser({
           name,
           sobrenome,
@@ -132,10 +129,31 @@ function Profile() {
       });
   }
 
+  const handleRemoveSheduleItem = useCallback(
+    async (id?: number, removeIndex?: number) => {
+      try {
+        if (id) await api.delete(`shedules/${id}`);
+
+        const auxShedules = [...scheduleItems];
+
+        const indexFind = auxShedules.findIndex(
+          (item, index) => index === removeIndex
+        );
+
+        auxShedules.splice(indexFind, 1);
+
+        setScheduleItems([...auxShedules]);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    },
+    [scheduleItems]
+  );
+
   return (
     <div id="page-profile-form" className="container">
       <PageHeader
-        avatar={user.avatar}
+        avatar={user.avatar ? user.avatar : userImgNotfound}
         title={user.name}
         path="Meu perfil"
         description={user.bio ? user.bio : "sem biografia"}
@@ -300,6 +318,15 @@ function Profile() {
                         setScheduleItemValue(index, "to", e.target.value)
                       }
                     />
+                  </div>
+
+                  <div
+                    onClick={() =>
+                      handleRemoveSheduleItem(scheduleItem.id, index)
+                    }
+                    className="profile-remove-item"
+                  >
+                    <span>Excluir horário</span>
                   </div>
                 </div>
               );

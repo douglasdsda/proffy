@@ -5,19 +5,20 @@ import Select from "../../components/Select";
 import TeacherItem, { Teacher } from "../../components/TeacherItem";
 import api from "../../services/api";
 
+
 import "./styles.css";
 
 function TeacherList() {
   const [teachers, setTeachers] = useState([]);
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState("Matemática");
 
-  const [week_day, setWeekDay] = useState("");
-  const [time, setTime] = useState("");
+  const [week_day, setWeekDay] = useState("5");
+  const [time, setTime] = useState("14:00");
 
   async function searchTeacher(e: FormEvent) {
     e.preventDefault();
 
-    const response = await api.get("classes", {
+    const response = await api.get("shedules", {
       params: {
         subject,
         week_day,
@@ -25,12 +26,14 @@ function TeacherList() {
       },
     });
 
-    setTeachers(response.data);
+    console.log('shedules: ',response.data )
+ 
+     setTeachers(response.data);
   }
 
   return (
     <div id="page-teacher-list" className="container">
-      <PageHeader title="Que incrivel que voce quer dar aulas.">
+      <PageHeader   path="Estudar" title="Que incrivel que voce quer dar aulas.">
         <form onSubmit={searchTeacher} id="search-teachers">
           <Select
             name="subject"

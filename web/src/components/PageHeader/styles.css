@@ -81,6 +81,7 @@
   width: 5rem;
   border-radius: 50%;
  margin-right: 2rem;
+ cursor: pointer;
 }
 
 .header-content-sub .header-icon span {
@@ -116,5 +117,6 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 
 import logoImg from "../../assets/images/logo.svg";
@@ -17,6 +17,14 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = (props) => {
+
+  const handleChangeImg = useCallback(
+    () => {
+ 
+    },
+    [ ],
+  )
+
   return (
     <header  className="page-header">
       <div className="top-bar-container">
@@ -29,7 +37,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
       </div>
 
       <div className="header-content"> 
-        {props?.avatar && <img src={props?.avatar} />}
+        {props?.avatar && <img onClick={handleChangeImg} src={props?.avatar} />}
         <strong>{props.title}</strong>
 
         <div className="header-content-sub">

@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
 import convertHourToMinutes from "../../utils/convertHourToMinutes";
 import { removePhoneMask } from "../../utils/Helper";
+import userImgNotfound from "../../assets/images-v2/user.png";
 
 interface SheduleDTO {
   id?: number;
@@ -21,16 +22,11 @@ interface SheduleDTO {
   class_id?: string;
 }
 
-
 function TeacherForm() {
   const history = useHistory();
 
-  const { user } = useAuth();
+  const { user , updateUser } = useAuth();
 
-  // const [name, setName] = useState("");
-  // const [sobrenome, setSobrenome] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [avatar, setAvatar] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [bio, setBio] = useState("");
 
@@ -43,35 +39,29 @@ function TeacherForm() {
 
   useEffect(() => {
     const load = async () => {
-      const response = await api.get("users");
+      const response = await api.get("classes");
+      console.log("response: ", response.data);
+      const { classes, schedule } = await response.data;
 
-      const { classes, shedule } = await response.data;
+      setBio(user?.bio || "");
 
-      // setBio(user?.bio || "");
-
-     
-      
- 
-      // setWhatsapp(user?.whatsapp || "");
+      setWhatsapp(user?.whatsapp || "");
       setCost(classes?.cost || "");
       setSubject(classes?.subject || "");
 
- 
-
-      const formattedShedule = shedule.map((item: SheduleDTO) => {
+      const formattedShedule = schedule.map((item: SheduleDTO) => {
         return {
           ...item,
           to: convertHourToMinutes(item.to),
           from: convertHourToMinutes(item.from),
         };
       });
-     
+
       if (formattedShedule) setScheduleItems(formattedShedule);
     };
 
     load();
-  }, [ ]);
-
+  }, [user]);
 
   function addNewScheduleItem() {
     setScheduleItems([
@@ -97,36 +87,28 @@ function TeacherForm() {
     });
     setScheduleItems(updateSheduleItems);
   }
-  
+
   function handleCreateClass(e: FormEvent) {
     e.preventDefault();
 
-    console.log({
-      // name,
-      // sobrenome,
-      // email,
-      // avatar,
-      whatsapp: removePhoneMask({ value: whatsapp }),
-      bio,
-      subject,
-      cost,
-      scheduleItems,
-    });
-
     api
-      .post("shedules", {
-        // name,
-        // email,
-        // sobrenome,
-        // avatar,
+      .put("classes", {
         whatsapp,
         bio,
         subject,
         cost: Number(cost),
-        shedule: scheduleItems,
+        schedule: scheduleItems,
       })
       .then(() => {
-        
+
+
+        updateUser({
+          ...user,
+          whatsapp: removePhoneMask({ value: whatsapp }),
+          bio,
+          id: user.id,
+        });
+
         history.push("/CreatedShedule");
       });
   }
@@ -147,7 +129,7 @@ function TeacherForm() {
 
             <div className="line">
               <div className="teacher-info">
-                <img src={user.avatar} alt="" />
+                <img src={user.avatar ? user.avatar : userImgNotfound} alt="" />
                 <strong>{user.name}</strong>
               </div>
 

@@ -76,6 +76,77 @@
   background: var(--color-secundary-dark);
 }
 
+.teacher-item .list-shedules-cards {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  overflow-x: scroll;
+  margin: 2rem;
+  padding-bottom: 20px;
+}
+
+.teacher-item .list-shedules-cards::-webkit-scrollbar {
+  /* display: none; */
+
+  background-color: #f4f4f4;
+  width: 30px;
+
+  height: ((15px * 2) + 5px);
+}
+
+.teacher-item .list-shedules-cards::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 12px;
+  background: var(--color-secundary);
+  background-clip: padding-box;
+}
+
+.teacher-item .list-shedules-cards::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 12px;
+}
+
+.teacher-item .list-shedules-cards .list-shedules-cards-item {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  flex-shrink: 0;
+
+  background-color: var(--color-box-footer);
+
+  cursor: pointer;
+
+  border-radius: 0.8rem;
+  border: 1px solid var(--color-line-in-white);
+  margin: 0 10px;
+  padding: 10px 0;
+  width: 130px;
+}
+
+.teacher-item .list-shedules-cards .list-shedules-cards-item div {
+  margin-top: 10px;
+  display: flex;
+  padding-left: 20px;
+  flex-direction: column;
+}
+
+.teacher-item .list-shedules-cards .list-shedules-cards-item div strong {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--color-text-complement);
+}
+
+.teacher-item .list-shedules-cards .disabled {
+  color: var(--color-line-in-white) !important;
+}
+
+.teacher-item .list-shedules-cards .disabled div strong {
+  color: var(--color-line-in-white) !important;
+}
+
 @media (min-width: 700px) {
   .teacher-item header,
   .teacher-item footer {
@@ -95,9 +166,14 @@
     width: 24.5rem;
     font-size: 1.6rem;
     justify-content: center;
+ 
   }
 
   .teacher-item footer button img {
     margin-right: 1.6rem;
+    border: none;
+    outline: 0 !important;
+    outline: none !important;
+    text-decoration: none !important;
   }
 }
