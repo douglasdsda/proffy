@@ -25,6 +25,7 @@ class SheduleRepository implements ISheduleRepository {
             .where('classes.subject', '=', subject)
             .join('users', 'classes.user_id', '=', 'users.id')
             .select(['classes.*', 'users.*']);
+
         return list;
     }
 

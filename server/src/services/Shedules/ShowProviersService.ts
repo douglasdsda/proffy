@@ -5,6 +5,7 @@ import IShedulesRepository from '../../interfaces/IShedulesRepository';
 import ICLassesRepository from '../../interfaces/IClassesRepository';
 
 import IUsersRepository from '../../interfaces/IUsersRepository';
+import SheduleStudyDTO from '../../dtos/SheduleStudyDTO';
 
 interface IRequest {
     subject: string;
@@ -29,14 +30,23 @@ class ShowProviersService {
             throw new AppError('filter invalid.');
         }
 
-        const list = this.shedulesRepository.findByFilter({
+        const list = await this.shedulesRepository.findByFilter({
             subject,
-
             timeMinutos,
             week_day,
         });
 
-        return list;
+        const listReturn = list.map((item: SheduleStudyDTO) => {
+            if (item.avatar) {
+                return {
+                    ...item,
+                    avatar_url: `${process.env.APP_API_URL}/files/${item.avatar}`,
+                };
+            }
+            return { ...item };
+        });
+
+        return listReturn;
     }
 }
 
