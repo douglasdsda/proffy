@@ -155,6 +155,34 @@
   margin-right: 2rem;
 }
 
+
+#page-teacher-form .profile-remove-item{
+  color: var(--color-danger) !important;
+ margin-top: 10px;;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  transition: opacity 0.3;
+}
+#page-teacher-form .profile-remove-item:hover {
+  opacity: 0.7;
+}
+
+#page-teacher-form .profile-remove-item::before, #page-teacher-form .profile-remove-item::after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid var(--color-title-sin-button);
+  margin: auto;
+}
+
+#page-teacher-form .profile-remove-item::before {
+  margin-right: 10px
+}
+
+#page-teacher-form .profile-remove-item::after {
+  margin-left: 10px
+}
+
 @media (min-width: 700px) {
   #page-teacher-form {
     max-width: 100vw;

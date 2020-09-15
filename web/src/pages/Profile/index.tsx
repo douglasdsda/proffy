@@ -44,7 +44,7 @@ function Profile() {
   useEffect(() => {
     const load = async () => {
       const response = await api.get("classes");
-        console.log('response profile: ', response.data)
+      console.log("response profile: ", response.data);
       const { classes, schedule } = await response.data;
 
       setBio(user?.bio || "");
@@ -124,6 +124,8 @@ function Profile() {
           whatsapp: removePhoneMask({ value: whatsapp }),
           bio,
           id: user.id,
+          avatar_url: user.avatar_url,
+          avatar: user.avatar,
         });
         history.push("/Landing");
       });

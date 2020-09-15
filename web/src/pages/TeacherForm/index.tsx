@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, useEffect } from "react";
+import React, { FormEvent, useState, useEffect, useCallback } from "react";
 import Input from "../../components/Input";
 import PageHeader from "../../components/PageHeader";
 import warningIcon from "../../assets/images/icons/warning.svg";
@@ -25,7 +25,7 @@ interface SheduleDTO {
 function TeacherForm() {
   const history = useHistory();
 
-  const { user , updateUser } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const [whatsapp, setWhatsapp] = useState("");
   const [bio, setBio] = useState("");
@@ -34,7 +34,7 @@ function TeacherForm() {
   const [cost, setCost] = useState("");
 
   const [scheduleItems, setScheduleItems] = useState([
-    { week_day: 0, from: "", to: "" },
+    { week_day: 0, from: "", to: "", id: undefined },
   ]);
 
   useEffect(() => {
@@ -70,6 +70,7 @@ function TeacherForm() {
         week_day: 0,
         from: "",
         to: "",
+        id: undefined,
       },
     ]);
   }
@@ -100,18 +101,39 @@ function TeacherForm() {
         schedule: scheduleItems,
       })
       .then(() => {
-
-
         updateUser({
           ...user,
           whatsapp: removePhoneMask({ value: whatsapp }),
           bio,
           id: user.id,
+          avatar_url: user.avatar_url,
+          avatar: user.avatar,
         });
 
         history.push("/CreatedShedule");
       });
   }
+
+  const handleRemoveSheduleItem = useCallback(
+    async (id?: number, removeIndex?: number) => {
+      try {
+        if (id) await api.delete(`shedules/${id}`);
+
+        const auxShedules = [...scheduleItems];
+
+        const indexFind = auxShedules.findIndex(
+          (item, index) => index === removeIndex
+        );
+
+        auxShedules.splice(indexFind, 1);
+
+        setScheduleItems([...auxShedules]);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    },
+    [scheduleItems]
+  );
 
   return (
     <div id="page-teacher-form" className="container">
@@ -129,7 +151,10 @@ function TeacherForm() {
 
             <div className="line">
               <div className="teacher-info">
-                <img src={user.avatar_url ? user.avatar_url : userImgNotfound} alt="" />
+                <img
+                  src={user.avatar_url ? user.avatar_url : userImgNotfound}
+                  alt=""
+                />
                 <strong>{user.name}</strong>
               </div>
 
@@ -252,6 +277,14 @@ function TeacherForm() {
                       }
                     />
                   </div>
+                  <div
+                      onClick={() =>
+                        handleRemoveSheduleItem(scheduleItem.id, index)
+                      }
+                      className="profile-remove-item"
+                    >
+                      <span>Excluir horário</span>
+                    </div>
                 </div>
               );
             })}

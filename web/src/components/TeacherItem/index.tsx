@@ -16,6 +16,7 @@ export interface Teacher {
   subject: string;
   user_id: string;
   whatsapp: string;
+  avatar_url?: string;
 }
 
 export interface SheduleItem {
@@ -116,12 +117,12 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
         });
       });
   }
-
+  console.log('avatar: ', teacher)
   return (
     <article className="teacher-item">
       <header>
         <img
-          src={teacher.avatar ? teacher.avatar : userImgNotfound}
+          src={teacher.avatar ? teacher.avatar_url : userImgNotfound}
           alt={teacher.name}
         />
         <div>

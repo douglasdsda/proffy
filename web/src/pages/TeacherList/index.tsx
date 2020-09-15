@@ -5,7 +5,6 @@ import Select from "../../components/Select";
 import TeacherItem, { Teacher } from "../../components/TeacherItem";
 import api from "../../services/api";
 
-
 import "./styles.css";
 
 function TeacherList() {
@@ -26,14 +25,12 @@ function TeacherList() {
       },
     });
 
-    console.log('shedules: ',response.data )
- 
-     setTeachers(response.data);
+    setTeachers(response.data);
   }
 
   return (
     <div id="page-teacher-list" className="container">
-      <PageHeader   path="Estudar" title="Que incrivel que voce quer dar aulas.">
+      <PageHeader path="Estudar" title="Que incrivel que voce quer dar aulas.">
         <form onSubmit={searchTeacher} id="search-teachers">
           <Select
             name="subject"
