@@ -117,7 +117,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
         });
       });
   }
-  console.log('avatar: ', teacher)
+ 
   return (
     <article className="teacher-item">
       <header>

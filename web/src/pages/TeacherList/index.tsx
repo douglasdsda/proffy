@@ -9,10 +9,10 @@ import "./styles.css";
 
 function TeacherList() {
   const [teachers, setTeachers] = useState([]);
-  const [subject, setSubject] = useState("Matemática");
+  const [subject, setSubject] = useState('');
 
-  const [week_day, setWeekDay] = useState("5");
-  const [time, setTime] = useState("14:00");
+  const [week_day, setWeekDay] = useState('');
+  const [time, setTime] = useState('');
 
   async function searchTeacher(e: FormEvent) {
     e.preventDefault();

@@ -42,7 +42,7 @@ const Reset: React.FC = () => {
             password: fields.password.value,
           })
           .then((response) => {
-            console.log("response: ", response);
+
             addToast({
               type: "success",
               title: "Resetado com sucesso.",

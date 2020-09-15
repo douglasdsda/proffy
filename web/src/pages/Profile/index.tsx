@@ -44,7 +44,6 @@ function Profile() {
   useEffect(() => {
     const load = async () => {
       const response = await api.get("classes");
-      console.log("response profile: ", response.data);
       const { classes, schedule } = await response.data;
 
       setBio(user?.bio || "");

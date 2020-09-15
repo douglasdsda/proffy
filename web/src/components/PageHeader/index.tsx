@@ -33,8 +33,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
         api
           .patch('/users/avatar', data)
           .then(response => {
-            console.log('data: ', response.data)
-
+ 
             updateUser(response.data);
 
             addToast({

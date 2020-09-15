@@ -30,7 +30,7 @@ function Landing() {
   const handleProfile = useCallback(() => {
     history.push('/Profile');
   }, [history])
-  console.log('user', user)
+
   return (
     <div id="page-landing">
       <div className="container" id="page-landing-content">
