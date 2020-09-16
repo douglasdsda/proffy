@@ -12,6 +12,7 @@ interface IRequest {
 
     sobrenome: string;
     whatsapp: string;
+    avatar: string;
     subject: string;
     cost: number;
     bio: string;
@@ -33,6 +34,7 @@ class UpdateProfile {
         name,
         email,
         sobrenome,
+        avatar,
         whatsapp,
         bio,
         subject,
@@ -54,6 +56,7 @@ class UpdateProfile {
 
         user.name = name;
         user.sobrenome = sobrenome;
+        user.avatar = avatar;
         user.email = email;
         user.whatsapp = whatsapp;
         user.bio = bio;
@@ -81,7 +84,6 @@ class UpdateProfile {
         }
 
         if (classes && classes.id) {
-            // await this.shedulesRepository.deleteByClassIdAll(classes.id);
             const listUpdate = schedule.filter(item => item.id !== undefined);
             const listInsert = schedule.filter(item => item.id === undefined);
 
@@ -91,8 +93,6 @@ class UpdateProfile {
                 this.shedulesRepository.save(listInsert, classes.id);
         }
 
-        if (user.avatar)
-            user.avatar_url = `${process.env.APP_API_URL}/files/${user.avatar}`;
         return { user, classes, schedule };
     }
 }

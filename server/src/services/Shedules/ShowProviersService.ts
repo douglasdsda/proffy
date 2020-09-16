@@ -5,7 +5,6 @@ import IShedulesRepository from '../../interfaces/IShedulesRepository';
 import ICLassesRepository from '../../interfaces/IClassesRepository';
 
 import IUsersRepository from '../../interfaces/IUsersRepository';
-import SheduleStudyDTO from '../../dtos/SheduleStudyDTO';
 
 interface IRequest {
     subject: string;
@@ -36,17 +35,7 @@ class ShowProviersService {
             week_day,
         });
 
-        const listReturn = list.map((item: SheduleStudyDTO) => {
-            if (item.avatar) {
-                return {
-                    ...item,
-                    avatar_url: `${process.env.APP_API_URL}/files/${item.avatar}`,
-                };
-            }
-            return { ...item };
-        });
-
-        return listReturn;
+        return list;
     }
 }
 

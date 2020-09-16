@@ -33,8 +33,7 @@ class ProfileShow {
             schedule =
                 (await this.shedulesRepository.findByClassId(classes.id)) || [];
         }
-        if (user.avatar)
-            user.avatar_url = `${process.env.APP_API_URL}/files/${user.avatar}`;
+
         return { user, classes, schedule };
     }
 }

@@ -16,6 +16,7 @@ export default class ClassesController {
             subject,
             cost,
             schedule,
+            avatar,
         } = req.body;
 
         const user_id = req.user.id;

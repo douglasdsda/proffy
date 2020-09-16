@@ -41,9 +41,6 @@ class UpdateUserAvatarService {
             id: user_id,
         });
 
-        if (user.avatar)
-            user.avatar_url = `${process.env.APP_API_URL}/files/${user.avatar}`;
-
         return user;
     }
 }
