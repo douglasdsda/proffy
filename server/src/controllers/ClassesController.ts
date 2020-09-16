@@ -33,6 +33,7 @@ export default class ClassesController {
             cost,
             schedule,
             user_id,
+            avatar,
         });
 
         return res.json(user);
