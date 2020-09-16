@@ -69,6 +69,7 @@
   bottom: 1.6rem;
 }
 
+
 #input-user.fillValue::before {
   width: calc(100% - 3.2rem);
   width: 2px;
@@ -100,4 +101,15 @@
   left: 0;
   top: 1.6rem;
   bottom: 1.6rem;
+}
+
+
+#input-user .label-description {
+  display: flex;
+  align-items: center;
+}
+
+#input-user .label-description span {
+  margin-left: 1rem;
+  color: var(--color-line-in-white);
 }

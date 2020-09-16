@@ -16,7 +16,6 @@ export interface Teacher {
   subject: string;
   user_id: string;
   whatsapp: string;
-  avatar_url?: string;
 }
 
 export interface SheduleItem {
@@ -78,8 +77,8 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
           formattedShedules[index] = {
             ...sheduleWeekDay[0],
             day: setDay(sheduleWeekDay[0].week_day),
-            min: convertHourToMinutes(min.toString()),
-            max: convertHourToMinutes(max.toString()),
+            min: convertHourToMinutes(Number(min.toString())),
+            max: convertHourToMinutes(Number(max.toString())),
           };
         } else {
           formattedShedules[index] = {
@@ -122,7 +121,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
     <article className="teacher-item">
       <header>
         <img
-          src={teacher.avatar ? teacher.avatar_url : userImgNotfound}
+          src={teacher.avatar ? teacher.avatar : userImgNotfound}
           alt={teacher.name}
         />
         <div>

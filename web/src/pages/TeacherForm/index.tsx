@@ -52,8 +52,8 @@ function TeacherForm() {
       const formattedShedule = schedule.map((item: SheduleDTO) => {
         return {
           ...item,
-          to: convertHourToMinutes(item.to),
-          from: convertHourToMinutes(item.from),
+          to: convertHourToMinutes(Number(item.to)),
+          from: convertHourToMinutes(Number(item.from)),
         };
       });
 
@@ -106,7 +106,6 @@ function TeacherForm() {
           whatsapp: removePhoneMask({ value: whatsapp }),
           bio,
           id: user.id,
-          avatar_url: user.avatar_url,
           avatar: user.avatar,
         });
 
@@ -152,7 +151,7 @@ function TeacherForm() {
             <div className="line">
               <div className="teacher-info">
                 <img
-                  src={user.avatar_url ? user.avatar_url : userImgNotfound}
+                  src={user.avatar ? user.avatar : userImgNotfound}
                   alt=""
                 />
                 <strong>{user.name}</strong>

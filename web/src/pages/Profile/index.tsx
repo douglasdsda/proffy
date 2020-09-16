@@ -32,6 +32,7 @@ function Profile() {
   const [email, setEmail] = useState("");
   const [sobrenome, SetSobrenome] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [bio, setBio] = useState("");
 
   const [subject, setSubject] = useState("");
@@ -49,6 +50,7 @@ function Profile() {
       setBio(user?.bio || "");
 
       SetSobrenome(user.sobrenome);
+      if(user.avatar) setAvatar(user.avatar);
       setName(user.name);
       setEmail(user.email);
       setWhatsapp(user?.whatsapp || "");
@@ -59,8 +61,8 @@ function Profile() {
         const formattedShedule = schedule.map((item: SheduleDTO) => {
           return {
             ...item,
-            to: convertHourToMinutes(item.to),
-            from: convertHourToMinutes(item.from),
+            to: convertHourToMinutes(Number(item.to)),
+            from: convertHourToMinutes(Number(item.from)),
           };
         });
 
@@ -107,6 +109,7 @@ function Profile() {
         whatsapp,
         bio,
         subject,
+        avatar,
         cost: Number(cost),
         schedule: scheduleItems,
       })
@@ -123,8 +126,7 @@ function Profile() {
           whatsapp: removePhoneMask({ value: whatsapp }),
           bio,
           id: user.id,
-          avatar_url: user.avatar_url,
-          avatar: user.avatar,
+          avatar,
         });
         history.push("/Landing");
       });
@@ -154,7 +156,7 @@ function Profile() {
   return (
     <div id="page-profile-form" className="container">
       <PageHeader
-        avatar={user.avatar_url ? user.avatar_url : userImgNotfound}
+        avatar={user.avatar ? user.avatar : userImgNotfound}
         title={user.name}
         path="Meu perfil"
         description={user.bio ? user.bio : "sem biografia"}
@@ -185,6 +187,20 @@ function Profile() {
                 value={sobrenome}
                 onChange={(e) => {
                   SetSobrenome(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="line">
+              <Input
+                col="col-100"
+                name="avatar"
+                required
+                description="Url da imagem"
+                label="Avatar"
+                value={avatar}
+                onChange={(e) => {
+                  setAvatar(e.target.value);
                 }}
               />
             </div>

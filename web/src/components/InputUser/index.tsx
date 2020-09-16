@@ -2,7 +2,6 @@ import React, {
   InputHTMLAttributes,
   useCallback,
   useState,
- 
   useMemo,
 } from "react";
 
@@ -14,6 +13,7 @@ interface InputUserProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   typePassword?: boolean;
   classStyles: string;
+  description?: string;
   label?: string;
 }
 
@@ -21,6 +21,7 @@ const InputUser: React.FC<InputUserProps> = ({
   typePassword,
   name,
   label,
+  description,
   classStyles,
   ...rest
 }) => {
@@ -40,7 +41,11 @@ const InputUser: React.FC<InputUserProps> = ({
       className={hasValue && !classStyles ? "fillValue" : classStyles}
     >
       <span className="input-label">
-        {label && hasValue && <label htmlFor={name}>{label}</label>}
+        <div className="label-description">
+          {label && hasValue && <label htmlFor={name}>{label}</label>}
+          <span>{description && "(" + description + ")"}</span>
+        </div>
+
         <input type={type ? "password" : "text"} id={name} {...rest} />
       </span>
       {typePassword && (

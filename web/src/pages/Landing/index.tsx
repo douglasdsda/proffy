@@ -37,7 +37,7 @@ function Landing() {
         <div className="container-title">
           <div className="landing-content-profile">
             <div className="landing-profile">
-              <img onClick={handleProfile}  src={user.avatar ? user.avatar_url : userImgNotfound} alt={user.name} />
+              <img onClick={handleProfile}  src={user.avatar ? user.avatar : userImgNotfound} alt={user.name} />
               <span>{user.name}</span>
             </div>
             <img onClick={signOut} src={sair} alt="Sair"/>

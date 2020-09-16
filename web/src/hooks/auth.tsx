@@ -10,7 +10,7 @@ interface User {
   avatar?: string;
   bio?: string;
   whatsapp?: string;
-  avatar_url?: string;
+ 
 }
 
 interface AuthState {

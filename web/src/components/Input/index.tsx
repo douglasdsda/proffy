@@ -33,9 +33,11 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className={col ? `input-block ${col}` : "input-block"}>
+     
       <div className="label-description">
-        <label htmlFor={name}>{label}</label>
-        <span>{description && description}</span>
+          <label htmlFor={name}>{label}</label>
+          <span>{description && "(" + description + ")"}</span>
+     
       </div>
    
      

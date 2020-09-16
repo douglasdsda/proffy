@@ -154,15 +154,6 @@
   align-items: center;
   justify-content: center;
  }
- 
- .page-header .change-avatar label input {
-  display: none; 
- }    
-
- .page-header .change-avatar label svg {
-  width: 20px;
-  height: 20px;
-  color: #312e38;
- }  
+   
 
 }

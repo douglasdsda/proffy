@@ -38,6 +38,7 @@
 .textarea-block .label-description {
   display: flex;
   align-items: center;
+  font-size: 1.3rem;
 }
 
 .textarea-block .label-description span {

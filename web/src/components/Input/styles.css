@@ -38,19 +38,15 @@
   bottom: 0;
 }
 
-.label-description {
+.input-block .label-description {
   display: flex;
   align-items: center;
+  font-size: 1.3rem;
 }
 
-.label-description span {
+.input-block .label-description span {
   margin-left: 1rem;
-  color: var(--color-text-complement);
-}
-
-.label-description {
-  display: flex;
-  align-items: center;
+  color: var(--color-line-in-white);
 }
 
 .col-100 {
