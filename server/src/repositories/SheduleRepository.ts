@@ -58,14 +58,16 @@ class SheduleRepository implements ISheduleRepository {
             .select('*')
             .where('class_id', '=', class_id);
 
-        shedules.map(item => {
-            const shedule = new Shedule();
-            Object.assign(shedule, {
-                ...item,
-            });
+        if (shedules.length > 0) {
+            shedules.map(item => {
+                const shedule = new Shedule();
+                Object.assign(shedule, {
+                    ...item,
+                });
 
-            return shedule;
-        });
+                return shedule;
+            });
+        }
 
         return shedules || undefined;
     }
