@@ -162,7 +162,6 @@ function TeacherForm() {
                 name="whatsapp"
                 mask="phone"
                 prefix="R$"
-                required
                 label="whatsapp"
                 value={whatsapp}
                 onChange={(e) => {
@@ -177,7 +176,6 @@ function TeacherForm() {
                 col="col-100"
                 description="Máximo 300 caracteres"
                 label="Biografia"
-                required
                 value={bio}
                 onChange={(e) => {
                   setBio(e.target.value);
@@ -194,7 +192,6 @@ function TeacherForm() {
                 col="col-60"
                 name="subject"
                 label="Matéria"
-                required
                 value={subject}
                 onChange={(e) => {
                   setSubject(e.target.value);

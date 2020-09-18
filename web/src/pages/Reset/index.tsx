@@ -38,8 +38,9 @@ const Reset: React.FC = () => {
 
       if (token) {
         api
-          .post(`reset/${token}`, {
+          .post(`reset`, {
             password: fields.password.value,
+            token,
           })
           .then((response) => {
 

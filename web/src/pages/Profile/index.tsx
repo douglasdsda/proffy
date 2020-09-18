@@ -195,7 +195,6 @@ function Profile() {
               <Input
                 col="col-100"
                 name="avatar"
-                required
                 description="Url da imagem"
                 label="Avatar"
                 value={avatar}
@@ -222,7 +221,6 @@ function Profile() {
                 name="whatsapp"
                 mask="phone"
                 prefix="R$"
-                required
                 label="whatsapp"
                 value={whatsapp}
                 onChange={(e) => {
@@ -237,7 +235,6 @@ function Profile() {
                 col="col-100"
                 description="Máximo 300 caracteres"
                 label="Biografia"
-                required
                 value={bio}
                 onChange={(e) => {
                   setBio(e.target.value);
@@ -254,7 +251,6 @@ function Profile() {
                 col="col-60"
                 name="subject"
                 label="Matéria"
-                required
                 value={subject}
                 onChange={(e) => {
                   setSubject(e.target.value);
