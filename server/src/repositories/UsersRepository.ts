@@ -63,6 +63,7 @@ class UsersRepository implements IUsersRepository {
         name,
         sobrenome,
         id,
+        avatar,
     }: User): Promise<void> {
         await db('users')
             .update({
@@ -71,6 +72,7 @@ class UsersRepository implements IUsersRepository {
                 whatsapp,
                 name,
                 sobrenome,
+                avatar,
             })
             .where('id', '=', id);
     }
