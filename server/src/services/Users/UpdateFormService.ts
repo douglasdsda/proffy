@@ -42,7 +42,6 @@ class UpdateFormService {
         user.whatsapp = whatsapp;
         user.bio = bio;
         if (user.id) {
-            console.log('user: ', user);
             await this.usersRepository.update(user);
         } else {
             await this.usersRepository.save(user);

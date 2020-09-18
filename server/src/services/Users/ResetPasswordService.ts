@@ -22,6 +22,7 @@ class ResetPasswordService {
 
     public async execute({ password, token }: IRequest): Promise<void> {
         const userToken = await this.usersTokensRepository.findByToken(token);
+       
 
         if (!userToken) {
             throw new AppError('User  token does not exists');
@@ -41,13 +42,13 @@ class ResetPasswordService {
         }
 
         const hashedPassword = await hash(password, 8);
-
-        await this.usersTokensRepository.deleteByUserId(user.id);
-
+ 
         user.password = hashedPassword;
-        await this.usersRepository.save({
+        await this.usersRepository.update({
             ...user,
         });
+
+        await this.usersTokensRepository.deleteByUserId(user.id);
     }
 }
 

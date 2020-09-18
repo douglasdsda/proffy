@@ -49,11 +49,9 @@ class UsersRepository implements IUsersRepository {
     }
 
     public async save(user: User): Promise<User> {
-        const userDBId = await db('users').insert(user);
-
-        user.id = userDBId[0];
-
-        return user || undefined;
+        const userDBId = await db('users').insert(user).returning('*');
+            user.id = userDBId[0];
+            return user;
     }
 
     public async update({
@@ -64,6 +62,7 @@ class UsersRepository implements IUsersRepository {
         sobrenome,
         id,
         avatar,
+        password
     }: User): Promise<void> {
         await db('users')
             .update({
@@ -73,8 +72,9 @@ class UsersRepository implements IUsersRepository {
                 name,
                 sobrenome,
                 avatar,
+                password
             })
-            .where('id', '=', id);
+            .where('id', '=', id).returning('*')
     }
 }
 

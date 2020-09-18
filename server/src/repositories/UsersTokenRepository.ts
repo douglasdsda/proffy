@@ -7,6 +7,7 @@ import ICreateUserTokenDTO from '../dtos/ICreateUserTokenDTO';
 
 class UsersTokensRepository implements IUsersTokensRepository {
     public async findByToken(token: string): Promise<UserToken | undefined> {
+       
         const userTokenDB = await db('users_tokens')
             .select('*')
             .where('token', '=', token)
@@ -57,7 +58,6 @@ class UsersTokensRepository implements IUsersTokensRepository {
         token,
     }: ICreateUserTokenDTO): Promise<UserToken> {
         const userToken = new UserToken();
-
         Object.assign(userToken, { user_id, token });
 
         await db('users_tokens').insert(userToken);
@@ -69,7 +69,7 @@ class UsersTokensRepository implements IUsersTokensRepository {
         if (updateUserDTO && updateUserDTO.user_id) {
             await db('users_tokens')
                 .update({ token: updateUserDTO.token })
-                .where('user_id', '=', updateUserDTO.user_id);
+                .where('user_id', '=', updateUserDTO.user_id).returning('*');
         }
     }
 }
