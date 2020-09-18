@@ -60,7 +60,7 @@
 
 ### Gif
 <div style="display: flex; flex-direction: 'row'; align-items: 'center';">
-     <img src="https://github.com/douglasdsda/proffy/blob/master/.github/proffy.gif" width="180">
+     <img src="https://github.com/douglasdsda/proffy/blob/master/.github/proffy.gif">
 </div>
 
 ### Site
@@ -110,6 +110,13 @@ $ yarn install
 
 # Run Aplication
 $ yarn start
+
+#knex create migration
+$ yarn knex:migrate
+
+#knex create rollback
+$ yarn knex:rollback
+
 ```
 Access API at http://localhost:3333/
 
