@@ -8,8 +8,6 @@ export default interface SheduleStudyDTO {
     bio: string;
     subject: string;
     cost: string;
-    created_at: string;
-    updated_at: string;
     user_id: number;
     avatar_url?: number;
 }

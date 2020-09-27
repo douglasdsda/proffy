@@ -8,10 +8,6 @@ export default class Shedule {
     from: string;
 
     to: string;
-
-    created_at: string;
-
-    updated_at: string;
 }
 
 export interface ScheduleItem {
@@ -20,6 +16,4 @@ export interface ScheduleItem {
     to: string;
     class_id: number;
     id?: number;
-    created_at?: string;
-    updated_at?: string;
 }
